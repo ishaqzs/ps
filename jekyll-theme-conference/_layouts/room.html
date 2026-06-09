@@ -1,0 +1,50 @@
+{%- include get_location_config.html -%}
+{%- assign this_room = page -%}
+
+{%- unless this_room.hide or location_hide -%}
+  {%- include header.html -%}
+
+  <!-- title for print: -->
+  <h1 class="display-5 mb-3 d-none d-print-inline">
+    {{ this_room.name }}
+  </h1>
+
+  <!-- title shown in browser: -->
+  <h1 class="display-5 mb-3 d-print-none text-break">
+    {{ site.data.lang[site.conference.lang].location.rooms | default: "Rooms" }}
+  </h1>
+
+  {% include navbar_rooms.html %}
+
+  {{ content }}
+
+  {% assign room_talks = false %}
+  {% for d in site.data.program.days %}
+    {% include get_day_hash.html %}
+    {% for r in d.rooms %}
+      {% if this_room.name == r.name and r.talks.size > 0 %}
+        {% unless room_talks %}
+          <h5 class="mt-4 mb-2">
+            {{ site.data.lang[site.conference.lang].location.talks | default: "Talks in this room" }}:
+          </h5>
+          {% assign room_talks = true %}
+        {% endunless %}
+
+        <h6 class="mt-1 mb-2">
+          {{- day_name -}}
+        </h6>
+
+        <table class="mw-100">
+        {%- for t in r.talks -%}
+          {%- assign talk = site.talks | where: 'name', t.name | first -%}
+          {%- include show_talk_listed.html hide_day=true -%}
+        {%- endfor -%}
+        </table>
+        {%- break -%}
+
+      {% endif %}
+    {% endfor %}
+  {% endfor %}
+
+  {%- include footer.html -%}
+{%- endunless -%}
