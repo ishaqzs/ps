@@ -1,299 +1,444 @@
+
 <!DOCTYPE html>
-<html lang="ps" dir="rtl">
-<head>
-    <meta charset="UTF-8">
+<html lang="nb">
+  <head>
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>پښتو</title>
-    <style>
-        /* MODERN DARK/NEON VARIABILITY */
-        :root {
-            --bg-dark: #0d1117;
-            --surface-dark: #161b22;
-            --accent-green: #00ff9d;
-            --accent-red: #ff3838;
-            --text-main: #f0f6fc;
-            --text-muted: #8b949e;
-            --border-color: #21262d;
-            --glow: 0 0 20px rgba(0, 255, 157, 0.2);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            transition: all 0.3s ease;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-dark);
-            color: var(--text-main);
-            direction: rtl;
-            text-align: right;
-            overflow-x: hidden;
-        }
-
-        /* NEON NAVIGATION */
-        header {
-            background: rgba(22, 27, 34, 0.8);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid var(--border-color);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 28px;
-            font-weight: 900;
-            color: #fff;
-            text-decoration: none;
-            letter-spacing: 1px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .logo span {
-            color: var(--accent-green);
-            text-shadow: var(--glow);
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 30px;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--text-muted);
-            font-weight: 600;
-            font-size: 16px;
-            position: relative;
-            padding: 5px 0;
-        }
-
-        .nav-links a:hover, .nav-links a.active {
-            color: var(--accent-green);
-            text-shadow: var(--glow);
-        }
-
-        /* CYBER HERO SECTION */
-        .hero {
-            position: relative;
-            padding: 120px 20px;
-            text-align: center;
-            background: radial-gradient(circle at 50% 50%, #002d1b 0%, var(--bg-dark) 70%);
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .hero h1 {
-            font-size: 52px;
-            font-weight: 800;
-            margin-bottom: 20px;
-            background: linear-gradient(45deg, #fff, var(--text-muted));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero p {
-            font-size: 20px;
-            color: var(--text-muted);
-            max-width: 700px;
-            margin: 0 auto 40px auto;
-            line-height: 1.8;
-        }
-
-        .cta-group {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-        }
-
-        .btn-cyber {
-            background: transparent;
-            color: var(--accent-green);
-            border: 2px solid var(--accent-green);
-            padding: 12px 35px;
-            font-size: 16px;
-            font-weight: bold;
-            text-decoration: none;
-            border-radius: 50px;
-            box-shadow: var(--glow);
-            text-transform: uppercase;
-        }
-
-        .btn-cyber:hover {
-            background: var(--accent-green);
-            color: var(--bg-dark);
-            box-shadow: 0 0 30px rgba(0, 255, 157, 0.5);
-            cursor: pointer;
-        }
-
-        /* GLASSMORPHISM CONTENT GRID */
-        .grid-container {
-            max-width: 1200px;
-            margin: 60px auto;
-            padding: 0 20px;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-        }
-
-        .cyber-card {
-            background: var(--surface-dark);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .cyber-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--accent-green);
-            box-shadow: var(--glow);
-        }
-
-        .card-banner {
-            height: 220px;
-            background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.7) 100%), 
-                        url('data:image/svg+xml;utf8,<svg xmlns="http://w3.org" width="100" height="100" viewBox="0 0 100 100"><rect fill="%23004d33" width="100" height="100"/><path d="M50 0 L100 50 L50 100 L0 50 Z" fill="%2300ff9d" opacity="0.1"/></svg>');
-            background-size: cover;
-            position: relative;
-        }
-
-        .card-tag {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: rgba(0, 255, 157, 0.15);
-            color: var(--accent-green);
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: bold;
-            border: 1px solid var(--accent-green);
-        }
-
-        .card-content {
-            padding: 25px;
-        }
-
-        .card-content h3 {
-            font-size: 22px;
-            margin-bottom: 12px;
-            color: #fff;
-        }
-
-        .card-content p {
-            color: var(--text-muted);
-            font-size: 15px;
-            line-height: 1.7;
-        }
-
-        /* FOOTER */
-        footer {
-            border-top: 1px solid var(--border-color);
-            background: #090d13;
-            padding: 40px 20px;
-            text-align: center;
-            color: var(--text-muted);
-            font-size: 14px;
-        }
-
-        footer span {
-            color: var(--accent-red);
-        }
-
-        /* RESPONSIVE RESPONSIVENESS */
-        @media (max-width: 992px) {
-            .grid-container { grid-template-columns: repeat(2, 1fr); }
-            .hero h1 { font-size: 40px; }
-        }
-
-        @media (max-width: 768px) {
-            .grid-container { grid-template-columns: 1fr; }
-            .nav-container { flex-direction: column; gap: 20px; }
-            .hero h1 { font-size: 32px; }
-        }
-    </style>
-</head>
-<body>
-
-    <!-- Header -->
-    <header>
-        <nav class="nav-container">
-            <a href="#" class="logo">پښتو<span></span></a>
-            <ul class="nav-links">
-                <li><a href="#" class="active">کور پاڼه</a></li>
-                <li><a href="#">فرهنګ او هنر</a></li>
-                <li><a href="#">زموږ په اړه</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <!-- Hero -->
-    <section class="hero">
-        <h1>وایي اغیار چې د دوزخ ژبه ده</h1>
-        <h1>زه به جنت ته د پښتو سره ځم</h1>
-        <p>موږ په راتلونکي لنډه موده کي دلته د پښتو ژبې د بډایه کولو دپاره تګلارې لرو..</p>
-        <div class="cta-group">
-            <a href="#" class="btn-cyber">زموږ سره یوځای سۍ</a>
-        </div>
-    </section>
-
-    <!-- Grid Layout -->
-    <div class="grid-container">
+    <script>
+  window.googleAnalyticsId = 'G-GT9NHR3GWB';
+</script>
+<title>Startsiden - Oslo kommune</title>
+    <meta name="google-site-verification" content="stzf8ggQPDP7-as1nRePBpZmFjt_acluimWHlbwlATA" />
+    <meta name="description" content="">
+    <meta property="og:title" content="Startsiden - Oslo kommune">
+    <meta property="og:description" content="">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://www.oslo.kommune.no/">
+    <meta property="og:image" content="https://ukeweb-public.s3.dualstack.eu-central-1.amazonaws.com/assets/FallbackImage4.png">
+    <meta property="og:locale" content="nb_NO">
+    <meta property="og:site_name" content="Oslo kommune">
+        <link rel="canonical" href="https://www.oslo.kommune.no/" />
+      <link href="/favicon.ico" rel="icon" type="image/x-icon">
+    <link href="https://oslokommune-designsystem.s3.dualstack.eu-central-1.amazonaws.com/3.3.3/ods.css" type="text/css" rel="stylesheet" />
+                <script type="module" src="/resources/frontend/assets/app-qTUw_3Si.js"></script>
+                <link rel="stylesheet" href="/resources/frontend/assets/app-_Kq7mCRn.css">
+        </head>
+  <body data-search-index="prod_oslo_kommune_no" data-search-app-id="NJ4QX1MFJ2" data-search-api-key="4ce897d2ad7bca6a9fbcac2888b35801" data-search-hosts-url="search.web.oslo.kommune.no">
+    <div class="ods-grid">
+      <div class="ods-grid__column--12">
         
-        <!-- Card 1 -->
-        <article class="cyber-card">
-            <div class="card-banner">
-                <span class="card-tag">هنر</span>
-            </div>
-            <div class="card-content">
-                <h3>عصري ډیزاین او هنر</h3>
-                <p>ډېر ژر...</p>
-            </div>
-        </article>
+<div id="io-nav-data" hidden data-nav-locale="nb-NO" data-nav-json-url="https://cdn.web.oslo.kommune.no/header-footer/header-footer.json"></div>
 
-        <!-- Card 2 -->
-        <article class="cyber-card">
-            <div class="card-banner">
-                <span class="card-tag">ټیکنالوژي</span>
-            </div>
-            <div class="card-content">
-                <h3>د پښتو کمپیوټري کول</h3>
-                <p>ډېر ژر...</p>
-            </div>
-        </article>
+<header class="ods-header io-header">
+  <div class="ods-header__logo">
+    <figure class="ods-logo">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 154">
+  <title>Oslologo</title>
+  <path d="m102.3 34.2-2.1-1.3C97 30.8 93.6 29 90 27.5v0C88.5 26.9 87 26.3 85.5 25.8 81.9 24.6 78.1 23.6 74.4 23c-1.6-0.2-3.2-0.4-4.9-0.6-3.8-0.3-7.7-0.3-11.5 0-1.6 0.1-3.3 0.3-4.9 0.6-3.8 0.6-7.5 1.5-11.2 2.8-1.5 0.5-3 1.1-4.5 1.7v0c-3.5 1.5-6.9 3.3-10.2 5.4l-2.1 1.3-10.3-19.7 1.8-1.1c3.5-2.2 7.1-4.1 10.8-5.7l1.9-0.9 3.7 7.1c1.1-0.4 2.1-0.8 3.2-1.2l-1.9-7.8 2-0.7C40.2 3 44.1 2 48.1 1.3l2.1-0.4 1.9 7.8 0.6-0.1c0.9-0.1 1.9-0.2 2.8-0.3v-8l2.1-0.1c2-0.1 4.1-0.2 6.1-0.2 2 0 4.1 0.1 6.1 0.2l2.1 0.1v8c1.1 0.1 2.2 0.2 3.4 0.4l1.9-7.8 2.1 0.4c4 0.7 8 1.7 11.8 2.9l2 0.7-1.9 7.8c1.1 0.4 2.1 0.8 3.2 1.2l3.7-7.1 1.9 0.9c3.7 1.7 7.3 3.6 10.8 5.7l1.8 1.1zm-81.5-18 6.1 11.6c2.8-1.7 5.7-3.1 8.7-4.4h0.1c1.6-0.7 3.2-1.3 4.8-1.8 3.9-1.3 7.9-2.4 11.9-3 1.7-0.3 3.4-0.5 5.2-0.6 4.1-0.3 8.2-0.3 12.3 0 1.7 0.2 3.5 0.4 5.2 0.6 4 0.6 8 1.6 11.9 2.9 1.6 0.6 3.2 1.2 4.8 1.8v0c3 1.3 5.9 2.8 8.8 4.4l6.1-11.6c-2.1-1.2-4.3-2.4-6.5-3.4l-3.7 7-1.9-0.8-0.8-0.3C91.9 17.8 89.9 17 87.9 16.4L85.9 15.7 87.8 8C85.4 7.3 83.1 6.7 80.7 6.2l-1.9 7.7-2.1-0.3C74.3 13.2 71.9 12.9 69.6 12.7L67.5 12.5V4.6c-2.4-0.1-4.9-0.1-7.3 0v7.9l-2.1 0.2C56.5 12.8 55 13 53.5 13.2 52.7 13.3 51.8 13.4 51 13.6L48.9 13.9 47 6.2C44.6 6.7 42.2 7.3 39.9 8l1.9 7.7-2 0.7c-2 0.7-4 1.4-5.9 2.2l-0.8 0.3-1.9 0.8-3.7-7c-2.4 1-4.6 2.2-6.7 3.5z"></path>
+  <path d="M63.7 154C28.5 154 0 125.5 0 90.4 0 55.3 28.5 26.7 63.6 26.7c35.1 0 63.7 28.5 63.7 63.6 0 16.9-6.7 33.1-18.6 45.1-11.9 11.9-28.2 18.6-45 18.6zm0-122.6c-32.6 0-59 26.4-59 58.9 0 32.5 26.4 59 58.9 59 32.6 0 59-26.4 59-58.9 0-15.6-6.2-30.6-17.3-41.7-11-11.1-26-17.4-41.6-17.3z"></path>
+  <path d="m51.4 72.2c-5-6.7-3.6-16.3 3.1-21.3 6.7-5 16.3-3.6 21.3 3.1 4 5.4 4 12.8 0 18.2l3.4 2.5c2.5-3.3 3.9-7.4 3.9-11.6 0-10.7-8.7-19.4-19.4-19.4-10.7 0-19.4 8.7-19.4 19.4 0 4.2 1.4 8.3 3.9 11.6z"></path>
+  <path d="m63.6 76.8c4.2 0 7.6-3.4 7.6-7.6v-0.8h2.5V63.6C73.7 58 69.2 53.5 63.6 53.5 58 53.5 53.5 58 53.5 63.6v4.8H56v0.8c0 4.2 3.4 7.6 7.6 7.6zM57.7 63.7c0-3.3 2.6-5.9 5.9-5.9 3.3 0 5.9 2.6 5.9 5.9 0 0 0 0 0 0v4.8h-1.8v0.8c0.1 2.3-1.6 4.2-3.9 4.3-2.3 0.1-4.2-1.6-4.3-3.9 0-0.1 0-0.3 0-0.4v-0.8h-1.8z"></path>
+  <rect x="20.2" y="93.2" width="5.8" height="5.9"></rect>
+  <path d="m110.7 88.7v3.1h3l-8.1 8.1V85.7l2.1 2.1 2.2-2.2-5.9-5.9-5.9 5.9 2.2 2.2 2.1-2.1v14.1l-8.1-8.1h2.9V88.6H88.9V97H92v-3l6.3 6.4H85.5L84.2 99.2 83.1 88.8C83 88.2 82.4 82.9 78 80.6H77.9L73.4 78.8 72.7 78.5 72 78.7c-2.8 0.7-5.6 1-8.4 0.9-2.8 0.1-5.7-0.2-8.4-0.9l-0.7-0.2-5.2 2h-0.1c-4.4 2.3-5.1 7.6-5.1 8.2l-1.2 10.8-1 0.8h-4.4c0.4-1.4 0.6-2.8 0.6-4.2 0-8.3-6.8-15-15.1-14.9-8.3 0-15 6.8-14.9 15.1 0 7.4 5.4 13.6 12.7 14.8H21c0.4 0.1 0.8 0.1 1.2 0.1l19.5 2c-0.7 6.6-2 13.1-3.9 19.5l2 0.7 2 0.6c2-6.7 3.4-13.6 4.1-20.5l4.4-3.7-0.7 27.2 1.8 0.3c8.2 1.4 16.6 1.4 24.9 0l1.8-0.3-0.7-27.1 4.4 3.7c0.7 6.9 2.1 13.8 4.1 20.5l4-1.3C88 126.4 86.7 119.9 86 113.3l19.6-1.8v-6.8L116 94.3v3h3.1V89ZM63.6 83.9c3 0.1 6-0.3 9-0.9l3.6 1.4c2.4 1.3 2.8 4.8 2.8 4.8l0.9 8.2h-5.1c-2 0-4.1-0.5-5.8-1.6-1.3-1-2.5-2.1-3.5-3.4l-7.2-8.8c1.8 0.2 3.6 0.3 5.3 0.3zM23.1 107h-0.5l-1.1-0.1c-5.9-0.9-10-6.5-9-12.4 0.9-5.9 6.5-10 12.4-9 5.9 0.9 10 6.5 9 12.4-0.9 5.2-5.5 9.1-10.8 9.1zm27.3-2.9-6 5.1-12-1.2c1.2-1 2.3-2.1 3.2-3.4h7.9l7-5.9zm0.3-11v0 0l-3.1 2.6 0.7-6.4v-0.1c0 0 0.3-3.5 2.8-4.8l2-0.8 3.6 4.4zm13 41c-3.3 0-6.6-0.2-9.8-0.7l0.2-8.9v0l0.7-29.4 4.5-3.8 3 3.7c1.3 1.7 2.9 3.2 4.6 4.4 1.8 1.1 3.9 1.8 6 2.1l0.8 31.9c-3.3 0.4-6.7 0.6-10 0.7zm37.7-26.6-18.1 1.7-9-7.6h0.7 5.9l3.4 3h17.2z"></path>
+  <path d="m162.9 87.5c0-15.5 9.8-25 21.8-25 12 0 21.8 9.5 21.8 25 0 16.1-9.8 25.7-21.8 25.7-12 0-21.8-9.6-21.8-25.7zm37.4 0c0-13.4-6.9-19.4-15.6-19.4-8.7 0-15.6 6-15.6 19.4 0 13.4 7.2 20.1 15.6 20.1 8.4 0 15.6-6.7 15.6-20.1z"></path>
+  <path d="m227.2 76.5c6.6 0 11.4 2.9 13.2 7.6l-4.4 2.2c-1.5-3.1-4.7-4.9-9-4.9-4.5 0-7.6 1.8-7.6 4.8 0 2.6 1.7 4.1 5.5 5l5.1 1c7.7 1.5 11.4 5 11.4 10.3 0 6.4-5.6 10.7-13.9 10.7-7.2 0-12.4-2.8-14.9-8l4.4-2.3c1.8 3.5 5.3 5.5 10.3 5.5 5 0 8.5-2.2 8.5-5.6 0-2.9-1.7-4.6-5.8-5.4l-6.1-1.2c-6.6-1.3-10.1-4.7-10.1-9.6 0.1-5.8 5.6-10.1 13.4-10.1z"></path>
+  <path d="m259.1 113c-6 0-8.9-3.7-8.9-9.4V63.2h5.8v40.2c0 3.1 1.7 4.6 4.5 4.6 0.7 0 1.4-0.1 2.1-0.3v5c-1.1 0.1-2.3 0.3-3.5 0.3z"></path>
+  <path d="m267.5 94.8c0-11.1 7.2-18.3 16.3-18.3 9.1 0 16.2 7.2 16.2 18.3 0 11.2-7.3 18.5-16.2 18.5-8.9 0-16.3-7.3-16.3-18.5zm26.5 0c0-9-4.7-13.3-10.2-13.3-5.5 0-10.3 4.2-10.3 13.3 0 9.1 4.6 13.5 10.3 13.5 5.7 0 10.2-4.5 10.2-13.5z"></path>
+</svg>
+          </figure>
+  </div>
+  <div id="io-nav-header" class="ods-header__content io-header__content" data-user-i18n="{&quot;io_entry_matrix_authenticated_chat&quot;:&quot;Innlogget Chat&quot;,&quot;io_header_user_more_choices&quot;:&quot;Flere valg&quot;,&quot;io_header_user_logged_in_as&quot;:&quot;Pålogget som&quot;,&quot;io_header_user_logout&quot;:&quot;Logg ut&quot;,&quot;io_header_user_logging_out&quot;:&quot;Logger ut...&quot;,&quot;io_chat_peer_claim_name&quot;:&quot;Navn:&quot;,&quot;io_chat_peer_claim_ssn&quot;:&quot;Fødselsnummer:&quot;,&quot;io_chat_peer_claim_organization_name&quot;:&quot;Bedriftnavn:&quot;,&quot;io_chat_peer_claim_organization_number&quot;:&quot;Org.nummer:&quot;}"></div>
+  <div class="io-header__mobile-user">
+    <div
+      data-io-header-user-button
+      data-variant="mobile"
+      data-i18n="{&quot;io_entry_matrix_authenticated_chat&quot;:&quot;Innlogget Chat&quot;,&quot;io_header_user_more_choices&quot;:&quot;Flere valg&quot;,&quot;io_header_user_logged_in_as&quot;:&quot;Pålogget som&quot;,&quot;io_header_user_logout&quot;:&quot;Logg ut&quot;,&quot;io_header_user_logging_out&quot;:&quot;Logger ut...&quot;,&quot;io_chat_peer_claim_name&quot;:&quot;Navn:&quot;,&quot;io_chat_peer_claim_ssn&quot;:&quot;Fødselsnummer:&quot;,&quot;io_chat_peer_claim_organization_name&quot;:&quot;Bedriftnavn:&quot;,&quot;io_chat_peer_claim_organization_number&quot;:&quot;Org.nummer:&quot;}"
+    ></div>
+  </div>
+</header>
 
-        <!-- Card 3 -->
-        <article class="cyber-card">
-            <div class="card-banner">
-                <span class="card-tag">کلتور</span>
-            </div>
-            <div class="card-content">
-                <h3>شاعریانې او نور څه</h3>
-                <p>ډېر ژر...</p>
-            </div>
-        </article>
+<div id="io-search-menu" class="io-search-menu"></div>
 
+<div id="ods-menu" class="io-menu"></div>
+      </div>
+      <main class="ods-grid__column--12 ">   
+<div id="ods-alert" class="ods-grid__column--12">
+  <div class="ods-grid ods-grid--gap">
+    <ods-alert :entry-id="1" :site-id="1"></ods-alert>
+  </div>
+</div>
+  <div class="ods-grid__column--12">
+                                      <div class="ods-grid__column--12">
+          
+<section class="io-news-main-page">
+  <div class="ods-grid ods-grid--gutter">
+    <div class="ods-grid__column--12">
+      <div class="ods-grid ods-grid--gap ods-grid--center">
+                  <div class="ods-grid__column--12">
+            <h2 class="io-text-preset-3 ods-none-breakpoint-medium" aria-hidden="true">Aktuelt</h2>
+            <h2 class="ods-sr-only">Aktuelt</h2>
+          </div>
+                <div class="ods-grid__column--12 ods-grid__column--6-breakpoint-medium">
+                                                                        
+
+
+<div class="ods-portrait-card ods-portrait-card--white ods-portrait-card--zoom">
+  <div class="ods-portrait-card__media">
+     <figure>
+      <picture>
+      <source srcset="https://img.oslo.kommune.no/_aktuelt-prod_/Bilder/sommer-2024-kommunens-ferieaktiviteter-til-barn-og-unge/DSCF3772-2.JPG?w=1000&amp;aspect_ratio=16:9&amp;gravity=50p,50p" media="(min-width: 1024px)">
+      <source srcset="https://img.oslo.kommune.no/_aktuelt-prod_/Bilder/sommer-2024-kommunens-ferieaktiviteter-til-barn-og-unge/DSCF3772-2.JPG?w=800&amp;aspect_ratio=16:9&amp;gravity=50p,50p" media="(min-width: 769px)">
+      <img class="ods-image" src="https://img.oslo.kommune.no/_aktuelt-prod_/Bilder/sommer-2024-kommunens-ferieaktiviteter-til-barn-og-unge/DSCF3772-2.JPG?w=400&amp;aspect_ratio=16:9&amp;gravity=50p,50p" alt="Barn spiller basketball i skolegården" title="">
+    </picture>
+    </figure>
+  </div>
+  <div class="ods-portrait-card__content">
+    <h3 class="ods-portrait-card__heading">
+      <a class="ods-portrait-card__link" href="https://aktuelt.oslo.kommune.no/43-000-unge-har-svart-oslo-er-en-god-by-a-vokse-opp-i">43 000 unge har svart: Oslo er en god by å vokse opp i</a>
+    </h3>
+    <p class="ods-portrait-card__text"></p>
+    <p class="ods-portrait-card__published">Publisert: 08.06.2026 / Pressemelding</p>
+  </div>
+</div>
+                  </div>
+        <div class="ods-grid__column--12 ods-grid__column--6-breakpoint-medium io-news-main-page__items">
+                      <div class="ods-grid ods-grid--gap">
+              <div class="ods-grid__column--12">
+                <h2 class="io-text-preset-3 ods-padding-bottom-3 ods-none ods-block-breakpoint-medium" aria-hidden="true">Aktuelt</h2>
+              </div>
+            </div>
+                                                                                            <div class="ods-grid ods-grid--gap ods-none ods-block-breakpoint-medium">
+                <div class="ods-grid__column--12">
+                  <div class="ods-portrait-card ods-portrait-card--white ">
+                    <div class="ods-portrait-card__content ods-portrait-card__content-no-image">
+                      <h3 class="ods-portrait-card__heading io-text-preset-6">
+                        <a class="ods-portrait-card__link" href="https://aktuelt.oslo.kommune.no/tillit-avgjor-om-ungdom-vil-ha-kontakt-med-utekontakter">Tillit avgjør om ungdom vil ha kontakt med utekontakter</a>
+                      </h3>
+                      <p class="ods-portrait-card__published">Publisert: 05.06.2026 / Aktuelt</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+                                                            <div class="ods-grid ods-grid--gap ods-none ods-block-breakpoint-medium">
+                <div class="ods-grid__column--12">
+                  <div class="ods-portrait-card ods-portrait-card--white  io-news-main-page__last-item">
+                    <div class="ods-portrait-card__content ods-portrait-card__content-no-image">
+                      <h3 class="ods-portrait-card__heading io-text-preset-6">
+                        <a class="ods-portrait-card__link" href="https://aktuelt.oslo.kommune.no/ung-leder-sondre-bygger-nye-rollemodeller-i-bydelen">Ung leder Søndre bygger nye rollemodeller i bydelen</a>
+                      </h3>
+                      <p class="ods-portrait-card__published">Publisert: 03.06.2026 / Nytt fra bydelene</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+                                            <div class="ods-grid__column--12">
+              <p class="ods-padding-top-6-breakpoint-medium">
+                
+
+  
+  <a class="io-news-main-page__link" href="https://aktuelt.oslo.kommune.no/">Til alle aktueltsaker</a>
+                <span class="ods-icon ods-icon--standalone ods-icon--size-kilo ods-icon--link-arrow ods-padding-left-2" aria-hidden="true"></span>
+              </p>
+            </div>
+                  </div>
+      </div>
     </div>
+  </div>
+  <div class="io-news-main-page__shape"></div>
+</section>
+      </div>
+            </div>
 
-    <!-- Footer -->
-    <footer>
-        <p>حقوق خوندي دي © ۲۰۲۶ پښتو.اف  <span>♥</span>د پښتو دپاره</p>
-    </footer>
+  <div class="ods-grid ods-grid--gutter ods-margin-vertical-8 ods-margin-vertical-13-breakpoint-medium">
+    <div class="ods-grid__column--12">
+      <div class="ods-grid ods-grid--gap-row-large ods-grid--center">
+                  <div class="ods-grid__column--12">
+    <div class="ods-grid ods-grid--gap">
+      <ul class="io-service-links">
+                                                                      <li class="io-service-links__item">
+              <a class="ods-service-link" href="https://www.oslo.kommune.no/dognapne-tjenester/">
+  <div class="ods-service-link__icon">
+    <span class="ods-icon ods-icon--24h" aria-hidden="true"></span>
+  </div>
+  <div class="ods-service-link__content">
+    <h2 class="ods-service-link__heading">Døgnåpne tjenester</h2>
+    <p class="ods-service-link__text">Legevakt, barnevern, inntauing, overgrepsmottak, vann- og avløp.</p>
+  </div>
+</a>
+            </li>
+                                                                                <li class="io-service-links__item">
+              <a class="ods-service-link" href="https://www.oslo.kommune.no/barnehage/">
+  <div class="ods-service-link__icon">
+    <span class="ods-icon ods-icon--swingset" aria-hidden="true"></span>
+  </div>
+  <div class="ods-service-link__content">
+    <h2 class="ods-service-link__heading">Barnehage</h2>
+    <p class="ods-service-link__text">Søke eller bytte, finn barnehage, oppsigelse.</p>
+  </div>
+</a>
+            </li>
+                                                                                <li class="io-service-links__item">
+              <a class="ods-service-link" href="https://www.oslo.kommune.no/skole-og-utdanning/">
+  <div class="ods-service-link__icon">
+    <span class="ods-icon ods-icon--backpack" aria-hidden="true"></span>
+  </div>
+  <div class="ods-service-link__content">
+    <h2 class="ods-service-link__heading">Skole og utdanning</h2>
+    <p class="ods-service-link__text">Ferie, skolekrets, aktivitetsskolen, utdanningstilbud, skoler i Oslo.</p>
+  </div>
+</a>
+            </li>
+                                                                                <li class="io-service-links__item">
+              <a class="ods-service-link" href="https://www.oslo.kommune.no/helse-og-omsorg/">
+  <div class="ods-service-link__icon">
+    <span class="ods-icon ods-icon--heart-plus" aria-hidden="true"></span>
+  </div>
+  <div class="ods-service-link__content">
+    <h2 class="ods-service-link__heading">Helse og omsorg</h2>
+    <p class="ods-service-link__text">Helsetjenester, rusomsorg, psykisk helse, sykehjem og barnevern.</p>
+  </div>
+</a>
+            </li>
+                                                                                <li class="io-service-links__item">
+              <a class="ods-service-link" href="https://www.oslo.kommune.no/plan-bygg-og-eiendom/">
+  <div class="ods-service-link__icon">
+    <span class="ods-icon ods-icon--crane" aria-hidden="true"></span>
+  </div>
+  <div class="ods-service-link__content">
+    <h2 class="ods-service-link__heading">Plan, bygg og eiendom</h2>
+    <p class="ods-service-link__text">Byggesøknad, saksinnsyn, planinnsyn, kart, eiendomsinformasjon.</p>
+  </div>
+</a>
+            </li>
+                                                                                <li class="io-service-links__item">
+              <a class="ods-service-link" href="https://www.oslo.kommune.no/gate-transport-og-parkering/">
+  <div class="ods-service-link__icon">
+    <span class="ods-icon ods-icon--bus" aria-hidden="true"></span>
+  </div>
+  <div class="ods-service-link__content">
+    <h2 class="ods-service-link__heading">Gate, transport og parkering</h2>
+    <p class="ods-service-link__text">Priser, sykkel, piggdekk, veiarbeid, TT, HC-kort, drosje, luftkvalitet.</p>
+  </div>
+</a>
+            </li>
+                                                                                <li class="io-service-links__item">
+              <a class="ods-service-link" href="https://www.oslo.kommune.no/avfall-og-gjenvinning/">
+  <div class="ods-service-link__icon">
+    <span class="ods-icon ods-icon--recycling" aria-hidden="true"></span>
+  </div>
+  <div class="ods-service-link__content">
+    <h2 class="ods-service-link__heading">Avfall og gjenvinning</h2>
+    <p class="ods-service-link__text">Gjenvinningsstasjoner, kildesortering, renovasjonstjenester.</p>
+  </div>
+</a>
+            </li>
+                                                                                <li class="io-service-links__item">
+              <a class="ods-service-link" href="https://www.oslo.kommune.no/natur-kultur-og-fritid/">
+  <div class="ods-service-link__icon">
+    <span class="ods-icon ods-icon--park" aria-hidden="true"></span>
+  </div>
+  <div class="ods-service-link__content">
+    <h2 class="ods-service-link__heading">Natur, kultur og fritid</h2>
+    <p class="ods-service-link__text">Bading, bibliotek, kunst, fritidsklubber, idrett, gravplasser, leie lokaler.</p>
+  </div>
+</a>
+            </li>
+                                                                                <li class="io-service-links__item">
+              <a class="ods-service-link" href="https://www.oslo.kommune.no/bolig-og-sosiale-tjenester/">
+  <div class="ods-service-link__icon">
+    <span class="ods-icon ods-icon--house-heart" aria-hidden="true"></span>
+  </div>
+  <div class="ods-service-link__content">
+    <h2 class="ods-service-link__heading">Bolig og sosiale tjenester</h2>
+    <p class="ods-service-link__text">NAV-kontor, bostøtte, økonomisk rådgivning, fri rettshjelp, tolk.</p>
+  </div>
+</a>
+            </li>
+                                                                                <li class="io-service-links__item">
+              <a class="ods-service-link" href="https://www.oslo.kommune.no/skatt-og-naring/">
+  <div class="ods-service-link__icon">
+    <span class="ods-icon ods-icon--coin-stacks" aria-hidden="true"></span>
+  </div>
+  <div class="ods-service-link__content">
+    <h2 class="ods-service-link__heading">Skatt og næring</h2>
+    <p class="ods-service-link__text">Eiendomsskatt, kommunale avgifter, salg, servering, bevilling, leverandør.</p>
+  </div>
+</a>
+            </li>
+                                                                                <li class="io-service-links__item">
+              <a class="ods-service-link" href="https://www.oslo.kommune.no/vann-og-avlop/">
+  <div class="ods-service-link__icon">
+    <span class="ods-icon ods-icon--water-faucet" aria-hidden="true"></span>
+  </div>
+  <div class="ods-service-link__content">
+    <h2 class="ods-service-link__heading">Vann og avløp</h2>
+    <p class="ods-service-link__text">Stengt vann, drikkevannskvalitet, kart, vann- og avløpsgebyr.</p>
+  </div>
+</a>
+            </li>
+                                                                                <li class="io-service-links__item">
+              <a class="ods-service-link" href="https://www.oslo.kommune.no/brannvern-ildsted-og-feiing/">
+  <div class="ods-service-link__icon">
+    <span class="ods-icon ods-icon--fire-emblem" aria-hidden="true"></span>
+  </div>
+  <div class="ods-service-link__content">
+    <h2 class="ods-service-link__heading">Brannvern, ildsted og feiing</h2>
+    <p class="ods-service-link__text">Brannsikkerhet, feiing og tilsyn, bål og grill, fyrverkeri.</p>
+  </div>
+</a>
+            </li>
+                        </ul>
+    </div>
+  </div>
+      </div>
+    </div>
+  </div>
 
-</body>
+                              <div class="ods-grid__column--12">
+                  
+
+<section class="ods-banner  ods-banner--media ">
+  <div class="ods-banner__content">
+          <div class="ods-banner__media">
+        <figure>
+      <picture>
+      <source srcset="/get-image/1625558/0/300/1:1/fae8af795721ffce473c228d06d521808214293c951b27d045e04a510a09db59" media="(min-width: 1024px)">
+      <source srcset="/get-image/1625558/0/300/1:1/fae8af795721ffce473c228d06d521808214293c951b27d045e04a510a09db59" media="(min-width: 769px)">
+      <img class="ods-image ods-image--circle" src="/get-image/1625558/0/300/1:1/fae8af795721ffce473c228d06d521808214293c951b27d045e04a510a09db59" alt="Illustrasjon av rådhuset" title="">
+    </picture>
+    </figure>
+      </div>
+        <div class="ods-banner__text">
+              <div class="ods-banner__section ods-banner__section--half">
+                                  <h2 class="ods-text--size-juliett ods-text--size-hotel-breakpoint-medium ods-text--size-delta-breakpoint-large">
+              Finn fram i kommunen
+            </h2>
+                                          <ul class="ods-unordered-list ods-unordered-list--clean ods-margin-top-4 ods-margin-top-8-breakpoint-medium">
+                                                <li class="ods-unordered-list__item">
+                   
+
+  
+  <a class="ods-link ods-link--arrow-right" href="https://www.oslo.kommune.no/bydeler/">Bydeler</a>
+                  </li>
+                                                                <li class="ods-unordered-list__item">
+                   
+
+  
+  <a class="ods-link ods-link--arrow-right" href="https://www.oslo.kommune.no/etater-foretak-og-ombud/">Etater, foretak og ombud</a>
+                  </li>
+                                                                <li class="ods-unordered-list__item">
+                   
+
+  
+  <a class="ods-link ods-link--arrow-right" href="https://www.oslo.kommune.no/radhuset/">Oslo rådhus</a>
+                  </li>
+                                          </ul>
+                  </div>
+              <div class="ods-banner__section ods-banner__section--half">
+                                  <h2 class="ods-text--size-juliett ods-text--size-hotel-breakpoint-medium ods-text--size-delta-breakpoint-large ods-margin-top-4 ods-margin-top-0-breakpoint-medium">
+              Politikk og medvirkning
+            </h2>
+                                          <ul class="ods-unordered-list ods-unordered-list--clean ods-margin-top-4 ods-margin-top-8-breakpoint-medium">
+                                                <li class="ods-unordered-list__item">
+                   
+
+  
+  <a class="ods-link ods-link--arrow-right" href="https://www.oslo.kommune.no/politikk/">Politikk</a>
+                  </li>
+                                                                <li class="ods-unordered-list__item">
+                   
+
+  
+  <a class="ods-link ods-link--arrow-right" href="https://www.oslo.kommune.no/medvirkning-i-oslo/">Medvirkning</a>
+                  </li>
+                                                                <li class="ods-unordered-list__item">
+                   
+
+  
+  <a class="ods-link ods-link--arrow-right" href="https://www.oslo.kommune.no/statistikk/">Statistikk</a>
+                  </li>
+                                          </ul>
+                  </div>
+          </div>
+  </div>
+</section>
+      </div>
+                  <div class="ods-grid__column--12">
+                  
+
+<section class="ods-banner ods-banner--yellow ods-banner--media ods-banner--media-right">
+  <div class="ods-banner__content">
+          <div class="ods-banner__media">
+        <figure>
+      <picture>
+      <source srcset="/get-image/1625600/0/300/1:1/567151dad50efae7196da277b4adff329fe6fe81d4a078ba41d9fcd6d8227169" media="(min-width: 1024px)">
+      <source srcset="/get-image/1625600/0/300/1:1/567151dad50efae7196da277b4adff329fe6fe81d4a078ba41d9fcd6d8227169" media="(min-width: 769px)">
+      <img class="ods-image ods-image--circle" src="/get-image/1625600/0/300/1:1/567151dad50efae7196da277b4adff329fe6fe81d4a078ba41d9fcd6d8227169" alt="Illustrasjoner av hus" title="">
+    </picture>
+    </figure>
+      </div>
+        <div class="ods-banner__text">
+              <div class="ods-banner__section ">
+                                  <h2 class="ods-text--size-juliett ods-text--size-hotel-breakpoint-medium ods-text--size-delta-breakpoint-large">
+              Et trygt og levende Oslo
+            </h2>
+                                <p>Slik utvikler vi byen for alle.</p>
+                            </div>
+              <div class="ods-banner__section ods-banner__section--half">
+                                          <ul class="ods-unordered-list ods-unordered-list--clean ods-margin-top-4 ods-margin-top-8-breakpoint-medium">
+                                                <li class="ods-unordered-list__item">
+                   
+
+  
+  <a class="ods-link ods-link--arrow-right" href="https://www.oslo.kommune.no/beredskap-og-egenberedskap/">Beredskap og egenberedskap</a>
+                  </li>
+                                                                <li class="ods-unordered-list__item">
+                   
+
+  
+  <a class="ods-link ods-link--arrow-right" href="https://www.oslo.kommune.no/byutvikling/">Byutvikling</a>
+                  </li>
+                                                                <li class="ods-unordered-list__item">
+                   
+
+  
+  <a class="ods-link ods-link--arrow-right" href="https://www.oslo.kommune.no/miljo-og-klima/">Miljø og klima</a>
+                  </li>
+                                          </ul>
+                  </div>
+              <div class="ods-banner__section ods-banner__section--half">
+                                          <ul class="ods-unordered-list ods-unordered-list--clean ods-margin-top-4 ods-margin-top-8-breakpoint-medium">
+                                                <li class="ods-unordered-list__item">
+                   
+
+  
+  <a class="ods-link ods-link--arrow-right" href="https://www.oslo.kommune.no/folkehelse-og-miljorettet-helsevern/">Folkehelse</a>
+                  </li>
+                                                                <li class="ods-unordered-list__item">
+                   
+
+  
+  <a class="ods-link ods-link--arrow-right" href="https://www.oslo.kommune.no/oxlo/">Mangfold og integrering</a>
+                  </li>
+                                                                <li class="ods-unordered-list__item">
+                   
+
+  
+  <a class="ods-link ods-link--arrow-right" href="https://www.oslo.kommune.no/satsingsomrader-og-prosjekter/hovedstadsloftet/">Hovedstadsløftet – ungt utenforskap</a>
+                  </li>
+                                          </ul>
+                  </div>
+          </div>
+  </div>
+</section>
+      </div>
+      </main>
+      <div class="ods-grid__column--12"><footer class="ods-footer">
+  <div class="ods-footer__gutter">
+    <div id="io-nav-footer" class="ods-footer__content"></div>
+  </div>
+</footer>
+</div>
+    </div>
+  </body>
 </html>
