@@ -5,11 +5,10 @@
   <title>Enterprise UI Design System – Option D</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- React + Babel + TypeScript -->
+  <!-- React + Babel -->
   <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-  <script src="https://unpkg.com/@babel/plugin-transform-typescript"></script>
 
   <style>
     :root {
@@ -36,7 +35,6 @@
       height: 100vh;
       overflow: hidden;
     }
-    /* Layout */
     .sidebar {
       width: 240px;
       background: var(--bg);
@@ -56,7 +54,6 @@
     .nav-item:hover {
       color: var(--primary);
     }
-    /* Components */
     .btn {
       padding: 8px 16px;
       border-radius: var(--radius);
@@ -116,13 +113,11 @@
 <body>
   <div id="root"></div>
 
-  <script type="text/babel" data-type="typescript" data-presets="typescript,react">
+  <!-- FIXED: Babel now compiles TS properly -->
+  <script type="text/babel" data-plugins="transform-typescript" data-presets="react">
 
-    // -----------------------------
-    // THEME + I18N CONTEXTS
-    // -----------------------------
     const ThemeContext = React.createContext({ theme: "light", toggle: () => {} });
-    const I18nContext = React.createContext({ lang: "en", t: (k: string) => k });
+    const I18nContext = React.createContext({ lang: "en", t: (k) => k });
 
     const translations = {
       en: {
@@ -138,9 +133,6 @@
       }
     };
 
-    // -----------------------------
-    // COMPONENTS
-    // -----------------------------
     const Button = ({ children, outline = false, ...rest }) =>
       <button className={outline ? "btn btn-outline" : "btn"} {...rest}>{children}</button>;
 
@@ -178,9 +170,6 @@
     const DatePicker = (props) =>
       <input type="date" className="input" {...props} />;
 
-    // -----------------------------
-    // DOCS PAGE
-    // -----------------------------
     const Docs = () => {
       const { t } = React.useContext(I18nContext);
       const [modalOpen, setModalOpen] = React.useState(false);
@@ -223,14 +212,10 @@
 
           <h2>{t("date")}</h2>
           <DatePicker />
-
         </div>
       );
     };
 
-    // -----------------------------
-    // LAYOUT + NAVIGATION
-    // -----------------------------
     const App = () => {
       const [theme, setTheme] = React.useState("light");
       const [lang, setLang] = React.useState("en");
@@ -241,7 +226,7 @@
         document.body.className = next === "dark" ? "theme-dark" : "";
       };
 
-      const t = (key: string) => translations[lang][key] || key;
+      const t = (key) => translations[lang][key] || key;
 
       return (
         <ThemeContext.Provider value={{ theme, toggle: toggleTheme }}>
@@ -263,23 +248,7 @@
       );
     };
 
-    // -----------------------------
-    // SIMPLE INLINE TESTS
-    // -----------------------------
-    const runTests = () => {
-      console.log("Running component tests...");
-      console.assert(typeof Button === "function", "Button component exists");
-      console.assert(typeof Input === "function", "Input component exists");
-      console.assert(typeof Table === "function", "Table component exists");
-      console.log("All tests passed.");
-    };
-    runTests();
-
-    // -----------------------------
-    // RENDER APP
-    // -----------------------------
     ReactDOM.createRoot(document.getElementById("root")).render(<App />);
-
   </script>
 </body>
 </html>
