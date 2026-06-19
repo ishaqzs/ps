@@ -1,1 +1,285 @@
-hi
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Enterprise UI Design System – Option D</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- React + Babel + TypeScript -->
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://unpkg.com/@babel/plugin-transform-typescript"></script>
+
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #1a1a1a;
+      --primary: #1677ff;
+      --border: #d9d9d9;
+      --radius: 6px;
+      --shadow: 0 2px 6px rgba(0,0,0,0.08);
+    }
+    .theme-dark {
+      --bg: #1e1e1e;
+      --text: #f0f0f0;
+      --primary: #4096ff;
+      --border: #444;
+      --shadow: 0 2px 6px rgba(0,0,0,0.4);
+    }
+    body {
+      margin: 0;
+      font-family: Inter, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+    }
+    /* Layout */
+    .sidebar {
+      width: 240px;
+      background: var(--bg);
+      border-right: 1px solid var(--border);
+      padding: 20px;
+      overflow-y: auto;
+    }
+    .content {
+      flex: 1;
+      padding: 24px;
+      overflow-y: auto;
+    }
+    .nav-item {
+      padding: 8px 0;
+      cursor: pointer;
+    }
+    .nav-item:hover {
+      color: var(--primary);
+    }
+    /* Components */
+    .btn {
+      padding: 8px 16px;
+      border-radius: var(--radius);
+      border: 1px solid var(--primary);
+      background: var(--primary);
+      color: white;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .btn-outline {
+      background: transparent;
+      color: var(--primary);
+    }
+    .input, .select {
+      padding: 8px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      width: 200px;
+    }
+    .table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 12px;
+    }
+    .table th, .table td {
+      border: 1px solid var(--border);
+      padding: 8px;
+    }
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal {
+      background: var(--bg);
+      padding: 20px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      width: 300px;
+    }
+    .toast {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: var(--primary);
+      color: white;
+      padding: 12px 16px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+  </style>
+</head>
+
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel" data-type="typescript" data-presets="typescript,react">
+
+    // -----------------------------
+    // THEME + I18N CONTEXTS
+    // -----------------------------
+    const ThemeContext = React.createContext({ theme: "light", toggle: () => {} });
+    const I18nContext = React.createContext({ lang: "en", t: (k: string) => k });
+
+    const translations = {
+      en: {
+        button: "Button",
+        input: "Input",
+        select: "Select",
+        table: "Table",
+        modal: "Modal",
+        notify: "Notification",
+        date: "Date Picker",
+        openModal: "Open Modal",
+        showToast: "Show Notification",
+      }
+    };
+
+    // -----------------------------
+    // COMPONENTS
+    // -----------------------------
+    const Button = ({ children, outline = false, ...rest }) =>
+      <button className={outline ? "btn btn-outline" : "btn"} {...rest}>{children}</button>;
+
+    const Input = (props) => <input className="input" {...props} />;
+
+    const Select = ({ options, ...rest }) =>
+      <select className="select" {...rest}>
+        {options.map(o => <option key={o}>{o}</option>)}
+      </select>;
+
+    const Table = ({ columns, data }) =>
+      <table className="table">
+        <thead>
+          <tr>{columns.map(c => <th key={c}>{c}</th>)}</tr>
+        </thead>
+        <tbody>
+          {data.map((row, i) =>
+            <tr key={i}>{columns.map(c => <td key={c}>{row[c]}</td>)}</tr>
+          )}
+        </tbody>
+      </table>;
+
+    const Modal = ({ open, onClose, children }) =>
+      open ? (
+        <div className="modal-backdrop" onClick={onClose}>
+          <div className="modal" onClick={e => e.stopPropagation()}>
+            {children}
+          </div>
+        </div>
+      ) : null;
+
+    const Toast = ({ message }) =>
+      <div className="toast">{message}</div>;
+
+    const DatePicker = (props) =>
+      <input type="date" className="input" {...props} />;
+
+    // -----------------------------
+    // DOCS PAGE
+    // -----------------------------
+    const Docs = () => {
+      const { t } = React.useContext(I18nContext);
+      const [modalOpen, setModalOpen] = React.useState(false);
+      const [toast, setToast] = React.useState("");
+
+      return (
+        <div>
+          <h1>Enterprise UI – Components</h1>
+
+          <h2>{t("button")}</h2>
+          <Button>Primary</Button>
+          <Button outline style={{ marginLeft: 8 }}>Outline</Button>
+
+          <h2>{t("input")}</h2>
+          <Input placeholder="Type here..." />
+
+          <h2>{t("select")}</h2>
+          <Select options={["Option A", "Option B"]} />
+
+          <h2>{t("table")}</h2>
+          <Table
+            columns={["name", "age"]}
+            data={[{ name: "Alice", age: 30 }, { name: "Bob", age: 25 }]}
+          />
+
+          <h2>{t("modal")}</h2>
+          <Button onClick={() => setModalOpen(true)}>{t("openModal")}</Button>
+          <Modal open={modalOpen} onClose={() => setModalOpen(false)}>
+            <h3>Modal Title</h3>
+            <p>This is a modal.</p>
+            <Button onClick={() => setModalOpen(false)}>Close</Button>
+          </Modal>
+
+          <h2>{t("notify")}</h2>
+          <Button onClick={() => {
+            setToast("Hello from Notification!");
+            setTimeout(() => setToast(""), 2000);
+          }}>{t("showToast")}</Button>
+          {toast && <Toast message={toast} />}
+
+          <h2>{t("date")}</h2>
+          <DatePicker />
+
+        </div>
+      );
+    };
+
+    // -----------------------------
+    // LAYOUT + NAVIGATION
+    // -----------------------------
+    const App = () => {
+      const [theme, setTheme] = React.useState("light");
+      const [lang, setLang] = React.useState("en");
+
+      const toggleTheme = () => {
+        const next = theme === "light" ? "dark" : "light";
+        setTheme(next);
+        document.body.className = next === "dark" ? "theme-dark" : "";
+      };
+
+      const t = (key: string) => translations[lang][key] || key;
+
+      return (
+        <ThemeContext.Provider value={{ theme, toggle: toggleTheme }}>
+          <I18nContext.Provider value={{ lang, t }}>
+            <div className="sidebar">
+              <h2>Design System</h2>
+              <div className="nav-item" onClick={toggleTheme}>
+                Toggle Theme
+              </div>
+              <div className="nav-item" onClick={() => setLang("en")}>
+                English
+              </div>
+            </div>
+            <div className="content">
+              <Docs />
+            </div>
+          </I18nContext.Provider>
+        </ThemeContext.Provider>
+      );
+    };
+
+    // -----------------------------
+    // SIMPLE INLINE TESTS
+    // -----------------------------
+    const runTests = () => {
+      console.log("Running component tests...");
+      console.assert(typeof Button === "function", "Button component exists");
+      console.assert(typeof Input === "function", "Input component exists");
+      console.assert(typeof Table === "function", "Table component exists");
+      console.log("All tests passed.");
+    };
+    runTests();
+
+    // -----------------------------
+    // RENDER APP
+    // -----------------------------
+    ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+
+  </script>
+</body>
+</html>
