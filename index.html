@@ -30,6 +30,11 @@
     ></script>
 
     <style>
+      @media (min-width: 992px) {
+  main.content {
+    display: none;
+  }
+}
       :root {
         --sidebar-width: 260px;
       }
@@ -131,7 +136,9 @@
         z-index: 1020;
         background-color: var(--bs-body-bg);
       }
-
+<button class="btn btn-sm btn-outline-secondary" id="toggleDashboardBtn">
+  <i class="fa-solid fa-eye"></i>
+</button>
       .topbar .navbar-nav .nav-link {
         padding: 0.25rem 0.75rem;
       }
@@ -1355,6 +1362,37 @@
           link.classList.add("active");
         });
       });
+      /* ------------------------------
+   SHOW / HIDE DASHBOARD (PC ONLY)
+------------------------------ */
+const dashboard = document.querySelector("main.content");
+const toggleDashboardBtn = document.getElementById("toggleDashboardBtn");
+
+function updateDashboardVisibility() {
+  const isDesktop = window.innerWidth >= 992;
+
+  if (isDesktop) {
+    // Hidden by default on PC
+    dashboard.style.display = dashboard.style.display === "none" ? "none" : "none";
+  } else {
+    // Always visible on mobile
+    dashboard.style.display = "block";
+  }
+}
+
+toggleDashboardBtn.addEventListener("click", () => {
+  if (dashboard.style.display === "none") {
+    dashboard.style.display = "block";
+    toggleDashboardBtn.innerHTML = '<i class="fa-solid fa-eye-slash"></i>';
+  } else {
+    dashboard.style.display = "none";
+    toggleDashboardBtn.innerHTML = '<i class="fa-solid fa-eye"></i>';
+  }
+});
+
+// Apply default state on load + resize
+updateDashboardVisibility();
+window.addEventListener("resize", updateDashboardVisibility);
     </script>
   </body>
 </html>
