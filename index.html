@@ -24,8 +24,18 @@
     <style>
       @media (min-width: 992px) {
   .sidebar {
-    display: none;
+    transform: translateX(-260px);
+    transition: transform 0.3s ease;
   }
+
+  .sidebar.sidebar-visible {
+    transform: translateX(0);
+  }
+}
+      @media (min-width: 992px) {
+  .sidebar {
+  transform: translateX(-260px);
+}
 }
       :root {
         --sidebar-width: 260px;
@@ -1016,6 +1026,15 @@ sidebarToggleBtn.addEventListener("click", () => {
   } else {
     sidebar.style.display = "none";
   }
+});
+/* ------------------------------
+   SHOW / HIDE SIDEBAR (PC ONLY)
+------------------------------ */
+const sidebar = document.querySelector(".sidebar");
+const sidebarToggleBtn = document.getElementById("sidebarToggleBtn");
+
+sidebarToggleBtn.addEventListener("click", () => {
+  sidebar.classList.toggle("sidebar-visible");
 });
 
     </script>
