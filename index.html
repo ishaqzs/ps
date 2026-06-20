@@ -18,6 +18,18 @@
       overflow-x: hidden;
       transition: background 0.3s ease;
     }
+/* RTL layout for Pashto */
+.rtl .content {
+  text-align: right;
+}
+
+.rtl .topbar {
+  direction: rtl;
+}
+
+.rtl .sidebar {
+  direction: rtl;
+}
 
     /* SIDEBAR BASE */
     .sidebar {
@@ -163,7 +175,13 @@
   <script>
     const sidebar = document.getElementById("sidebar");
     const content = document.getElementById("content");
-
+if (lang === "ar") {
+  document.body.setAttribute("dir", "rtl");
+  document.body.classList.add("rtl");
+} else {
+  document.body.setAttribute("dir", "ltr");
+  document.body.classList.remove("rtl");
+}
     /* MOBILE SIDEBAR TOGGLE */
     document.getElementById("mobileSidebarBtn").addEventListener("click", () => {
       sidebar.classList.toggle("sidebar-visible");
@@ -222,7 +240,22 @@
         const el = document.getElementById(key);
         if (el) el.textContent = ui[lang][key];
       }
+<style>
+  /* your existing CSS... */
 
+  /* ADD THIS AT THE BOTTOM */
+  .rtl .content {
+    text-align: right;
+  }
+
+  .rtl .topbar {
+    direction: rtl;
+  }
+
+  .rtl .sidebar {
+    direction: rtl;
+  }
+</style>
       // RTL support
       if (lang === "ps") {
         document.body.setAttribute("dir", "rtl");
