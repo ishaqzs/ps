@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ps">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -139,9 +139,8 @@
             <span class="d-none d-sm-inline" id="tb_language">Language</span>
           </button>
           <ul class="dropdown-menu dropdown-menu-end">
+            <li><button class="dropdown-item lang-option" data-lang="ps">🇦🇫 پښتو</button></li>
             <li><button class="dropdown-item lang-option" data-lang="en">🇬🇧 English</button></li>
-            <li><button class="dropdown-item lang-option" data-lang="no">🇳🇴 Norwegian</button></li>
-            <li><button class="dropdown-item lang-option" data-lang="ar">🇸🇦 Arabic</button></li>
           </ul>
         </div>
 
@@ -200,24 +199,7 @@
         welcomeSubText: "Your advanced dashboard layout is ready."
       },
 
-      no: {
-        sb_title: "Admin Starter",
-        sb_minimize: "Minimer",
-        sb_dashboard: "Dashbord",
-        sb_calendar: "Kalender",
-        sb_table: "Datatabell",
-        sb_pages: "Sider",
-        sb_settings: "Innstillinger",
-
-        tb_title: "Dashbord",
-        tb_theme: "Mørk",
-        tb_language: "Språk",
-
-        welcomeText: "Velkommen",
-        welcomeSubText: "Ditt avanserte dashbordoppsett er klart."
-      },
-
-      ar: {
+      ps: {
         sb_title: "لوحة الإدارة",
         sb_minimize: "تصغير",
         sb_dashboard: "الرئيسية",
@@ -242,7 +224,7 @@
       }
 
       // RTL support
-      if (lang === "ar") {
+      if (lang === "ps") {
         document.body.setAttribute("dir", "rtl");
       } else {
         document.body.setAttribute("dir", "ltr");
