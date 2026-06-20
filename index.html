@@ -1,38 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fa" dir="rtl">
 <head>
   <meta charset="UTF-8" />
-  <title>Atlas UI – React Design System for Enterprise Apps</title>
+  <title>سرویس DNS پویا و Reverse Proxy – نمونه طراحی شبیه DNSLab</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     :root {
-      --color-bg: #0f172a;
-      --color-surface: #111827;
-      --color-surface-alt: #020617;
-      --color-border: #1f2937;
-      --color-primary: #3b82f6;
-      --color-primary-soft: rgba(59,130,246,0.12);
-      --color-text: #e5e7eb;
-      --color-text-muted: #9ca3af;
-      --color-accent: #22c55e;
-      --radius-lg: 12px;
-      --radius-md: 8px;
+      --bg: #020617;
+      --bg-soft: #0b1220;
+      --surface: #020617;
+      --surface-alt: #020617;
+      --border: #1f2937;
+      --primary: #3b82f6;
+      --primary-soft: rgba(59,130,246,0.12);
+      --accent: #22c55e;
+      --danger: #ef4444;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --radius-lg: 14px;
+      --radius-md: 10px;
       --radius-sm: 6px;
-      --shadow-soft: 0 18px 45px rgba(15,23,42,0.85);
-      --shadow-chip: 0 10px 25px rgba(15,23,42,0.9);
-      --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
-        "Segoe UI", sans-serif;
+      --shadow: 0 18px 45px rgba(15,23,42,0.9);
+      --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "IRANSans", "Segoe UI", sans-serif;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
       font-family: var(--font-sans);
-      background: radial-gradient(circle at top left, #1e293b 0, #020617 55%, #000 100%);
-      color: var(--color-text);
+      background: radial-gradient(circle at top, #020617 0, #020617 40%, #000 100%);
+      color: var(--text);
     }
 
     .page {
@@ -44,105 +42,94 @@
     .shell {
       max-width: 1120px;
       margin: 0 auto;
-      padding: 32px 20px 64px;
+      padding: 24px 16px 64px;
     }
 
     header {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      margin-bottom: 32px;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 24px;
     }
 
-    .logo {
+    .brand {
       display: flex;
       align-items: center;
       gap: 10px;
     }
 
-    .logo-mark {
+    .brand-mark {
       width: 32px;
       height: 32px;
       border-radius: 999px;
-      background: conic-gradient(
-        from 180deg,
-        #3b82f6,
-        #22c55e,
-        #a855f7,
-        #ec4899,
-        #3b82f6
-      );
-      box-shadow: 0 0 0 1px rgba(15,23,42,0.9), 0 12px 30px rgba(15,23,42,0.9);
+      background: conic-gradient(from 180deg,#3b82f6,#22c55e,#a855f7,#ec4899,#3b82f6);
+      box-shadow: 0 0 0 1px #020617, 0 12px 30px rgba(15,23,42,0.9);
       position: relative;
     }
 
-    .logo-mark::after {
+    .brand-mark::after {
       content: "";
       position: absolute;
       inset: 6px;
       border-radius: inherit;
-      background: radial-gradient(circle at 30% 20%, #0f172a 0, #020617 55%, #000 100%);
+      background: radial-gradient(circle at 30% 20%,#020617 0,#020617 55%,#000 100%);
     }
 
-    .logo-text-main {
+    .brand-title {
+      font-size: 15px;
       font-weight: 600;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-      font-size: 13px;
     }
 
-    .logo-text-sub {
+    .brand-sub {
       font-size: 11px;
-      color: var(--color-text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
+      color: var(--muted);
     }
 
     nav {
       display: flex;
-      gap: 16px;
+      flex-wrap: wrap;
+      gap: 10px;
       font-size: 13px;
     }
 
     nav a {
-      color: var(--color-text-muted);
       text-decoration: none;
+      color: var(--muted);
       padding: 6px 10px;
       border-radius: 999px;
       border: 1px solid transparent;
+      background: transparent;
       transition: all 0.16s ease-out;
     }
 
     nav a:hover {
-      color: var(--color-text);
-      border-color: rgba(148,163,184,0.35);
-      background: rgba(15,23,42,0.85);
+      color: var(--text);
+      border-color: rgba(148,163,184,0.5);
+      background: rgba(15,23,42,0.9);
     }
 
     .hero {
       display: grid;
-      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.1fr);
-      gap: 28px;
-      margin-bottom: 32px;
+      grid-template-columns: minmax(0,1.4fr) minmax(0,1.1fr);
+      gap: 20px;
+      margin-bottom: 28px;
     }
 
     @media (max-width: 880px) {
       .hero {
-        grid-template-columns: minmax(0, 1fr);
+        grid-template-columns: minmax(0,1fr);
       }
     }
 
     .hero-main {
-      padding: 22px 22px 24px;
       border-radius: 18px;
-      background: linear-gradient(
-        145deg,
-        rgba(15,23,42,0.96),
-        rgba(15,23,42,0.98),
-        rgba(15,23,42,0.98)
-      );
-      box-shadow: var(--shadow-soft);
-      border: 1px solid rgba(148,163,184,0.35);
+      background: linear-gradient(145deg,#020617,#020617,#020617);
+      border: 1px solid rgba(148,163,184,0.4);
+      box-shadow: var(--shadow);
+      padding: 18px 18px 20px;
       position: relative;
       overflow: hidden;
     }
@@ -152,16 +139,13 @@
       position: absolute;
       inset: -120px;
       background:
-        radial-gradient(circle at 0% 0%, rgba(59,130,246,0.18) 0, transparent 55%),
-        radial-gradient(circle at 100% 0%, rgba(34,197,94,0.16) 0, transparent 55%);
+        radial-gradient(circle at 0% 0%,rgba(59,130,246,0.18) 0,transparent 55%),
+        radial-gradient(circle at 100% 0%,rgba(34,197,94,0.16) 0,transparent 55%);
       opacity: 0.9;
       pointer-events: none;
     }
 
-    .hero-main-inner {
-      position: relative;
-      z-index: 1;
-    }
+    .hero-inner { position: relative; z-index: 1; }
 
     .hero-kicker {
       display: inline-flex;
@@ -169,56 +153,50 @@
       gap: 8px;
       padding: 4px 10px;
       border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.5);
       background: rgba(15,23,42,0.9);
-      border: 1px solid rgba(148,163,184,0.45);
       font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: var(--color-text-muted);
-      margin-bottom: 14px;
+      color: var(--muted);
     }
 
-    .hero-kicker-dot {
+    .hero-dot {
       width: 6px;
       height: 6px;
       border-radius: 999px;
-      background: var(--color-accent);
+      background: var(--accent);
       box-shadow: 0 0 0 4px rgba(34,197,94,0.18);
     }
 
     .hero-title {
-      font-size: 28px;
-      line-height: 1.25;
-      letter-spacing: 0.02em;
-      margin-bottom: 10px;
+      margin: 12px 0 8px;
+      font-size: 24px;
+      line-height: 1.5;
     }
 
-    .hero-subtitle {
-      font-size: 14px;
-      color: var(--color-text-muted);
-      max-width: 460px;
-      margin-bottom: 18px;
+    .hero-sub {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 14px;
     }
 
     .hero-actions {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
-      margin-bottom: 18px;
+      margin-bottom: 14px;
     }
 
     .btn-primary {
-      padding: 8px 14px;
-      border-radius: 999px;
-      border: 1px solid rgba(59,130,246,0.9);
-      background: radial-gradient(circle at 0% 0%, #3b82f6 0, #1d4ed8 45%, #0f172a 100%);
-      color: #eff6ff;
-      font-size: 13px;
-      font-weight: 500;
-      text-decoration: none;
       display: inline-flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
+      padding: 7px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(59,130,246,0.9);
+      background: radial-gradient(circle at 0% 0%,#3b82f6 0,#1d4ed8 45%,#020617 100%);
+      color: #eff6ff;
+      font-size: 13px;
+      text-decoration: none;
       box-shadow: 0 12px 30px rgba(15,23,42,0.9);
       transition: transform 0.12s ease-out, box-shadow 0.12s ease-out;
     }
@@ -229,44 +207,44 @@
     }
 
     .btn-ghost {
-      padding: 8px 14px;
-      border-radius: 999px;
-      border: 1px solid rgba(148,163,184,0.45);
-      background: rgba(15,23,42,0.9);
-      color: var(--color-text-muted);
-      font-size: 13px;
-      text-decoration: none;
       display: inline-flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
+      padding: 7px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.5);
+      background: rgba(15,23,42,0.9);
+      color: var(--muted);
+      font-size: 13px;
+      text-decoration: none;
       transition: all 0.14s ease-out;
     }
 
     .btn-ghost:hover {
-      color: var(--color-text);
-      border-color: rgba(148,163,184,0.8);
+      color: var(--text);
+      border-color: rgba(148,163,184,0.9);
       background: rgba(15,23,42,0.96);
     }
 
     .hero-meta {
       display: flex;
       flex-wrap: wrap;
-      gap: 12px;
+      gap: 8px;
       font-size: 11px;
-      color: var(--color-text-muted);
+      color: var(--muted);
     }
 
-    .hero-meta-pill {
+    .hero-pill {
       display: inline-flex;
       align-items: center;
       gap: 6px;
       padding: 4px 10px;
       border-radius: 999px;
-      background: rgba(15,23,42,0.9);
       border: 1px solid rgba(31,41,55,0.9);
+      background: rgba(15,23,42,0.9);
     }
 
-    .hero-meta-dot {
+    .hero-pill-dot {
       width: 6px;
       height: 6px;
       border-radius: 999px;
@@ -276,29 +254,27 @@
     .hero-side {
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 12px;
     }
 
     .card {
       border-radius: var(--radius-lg);
-      background: var(--color-surface);
-      border: 1px solid rgba(31,41,55,0.9);
-      padding: 14px 14px 12px;
-      box-shadow: 0 14px 32px rgba(15,23,42,0.9);
+      background: #020617;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      padding: 12px 12px 10px;
     }
 
     .card-header {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      margin-bottom: 10px;
+      justify-content: space-between;
+      margin-bottom: 8px;
     }
 
     .card-title {
       font-size: 13px;
-      text-transform: uppercase;
-      letter-spacing: 0.16em;
-      color: var(--color-text-muted);
+      color: var(--muted);
     }
 
     .card-badge {
@@ -312,64 +288,7 @@
 
     .card-body {
       font-size: 12px;
-      color: var(--color-text-muted);
-    }
-
-    .chip-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 10px;
-    }
-
-    .chip {
-      padding: 4px 9px;
-      border-radius: 999px;
-      border: 1px solid rgba(31,41,55,0.9);
-      background: rgba(15,23,42,0.96);
-      font-size: 11px;
-      color: var(--color-text-muted);
-      box-shadow: var(--shadow-chip);
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .chip-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 999px;
-      background: rgba(59,130,246,0.9);
-    }
-
-    .layout {
-      display: grid;
-      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1.1fr);
-      gap: 24px;
-    }
-
-    @media (max-width: 880px) {
-      .layout {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
-    .section {
-      margin-top: 28px;
-    }
-
-    .section-title {
-      font-size: 14px;
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
-      color: var(--color-text-muted);
-      margin-bottom: 10px;
-    }
-
-    .section-subtitle {
-      font-size: 13px;
-      color: var(--color-text-muted);
-      margin-bottom: 14px;
+      color: var(--muted);
     }
 
     .list {
@@ -377,411 +296,472 @@
       padding: 0;
       margin: 0;
       font-size: 12px;
-      color: var(--color-text-muted);
+      color: var(--muted);
     }
 
     .list li {
-      padding: 6px 0;
+      padding: 5px 0;
       border-bottom: 1px solid rgba(31,41,55,0.8);
     }
 
-    .list li:last-child {
-      border-bottom: none;
-    }
+    .list li:last-child { border-bottom: none; }
 
     .list-label {
-      color: var(--color-text);
+      color: var(--text);
       font-weight: 500;
-      margin-right: 6px;
+      margin-left: 4px;
     }
 
-    .code-block {
-      margin-top: 10px;
+    .section {
+      margin-top: 26px;
+    }
+
+    .section-title {
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .section-sub {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: minmax(0,1.2fr) minmax(0,1.1fr);
+      gap: 18px;
+    }
+
+    @media (max-width: 880px) {
+      .grid {
+        grid-template-columns: minmax(0,1fr);
+      }
+    }
+
+    .code {
+      margin-top: 8px;
       border-radius: var(--radius-md);
-      background: var(--color-surface-alt);
-      border: 1px solid rgba(31,41,55,0.9);
+      background: #020617;
+      border: 1px solid var(--border);
       padding: 10px 12px;
-      font-family: "SF Mono", ui-monospace, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
       font-size: 11px;
       color: #cbd5f5;
+      direction: ltr;
+      text-align: left;
       overflow-x: auto;
     }
 
     footer {
-      margin-top: 40px;
+      margin-top: 32px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
       font-size: 11px;
-      color: var(--color-text-muted);
-      border-top: 1px solid rgba(31,41,55,0.9);
-      padding-top: 14px;
+      color: var(--muted);
       display: flex;
       justify-content: space-between;
-      flex-wrap: wrap;
       gap: 10px;
+      flex-wrap: wrap;
     }
   </style>
 </head>
 <body>
-  <div class="page">
-    <div class="shell">
-      <header>
-        <div class="logo">
-          <div class="logo-mark"></div>
-          <div>
-            <div class="logo-text-main">Atlas UI</div>
-            <div class="logo-text-sub">React design system</div>
-          </div>
+<div class="page">
+  <div class="shell">
+    <header>
+      <div class="brand">
+        <div class="brand-mark"></div>
+        <div>
+          <div class="brand-title">FaraDNS</div>
+          <div class="brand-sub">سرویس DNS پویا و Reverse Proxy برای کاربران فارسی‌زبان</div>
         </div>
-        <nav>
-          <a href="#components">Components</a>
-          <a href="#theming">Theming</a>
-          <a href="#i18n">Internationalization</a>
-          <a href="#docs">Docs site</a>
-          <a href="#structure">Repo structure</a>
-        </nav>
-      </header>
+      </div>
+      <nav>
+        <a href="#overview">نمای کلی</a>
+        <a href="#dns">DNS پویا</a>
+        <a href="#panel">پنل کاربری</a>
+        <a href="#api">API و لینک آپدیت</a>
+        <a href="#reverse-proxy">Reverse Proxy</a>
+        <a href="#arch">معماری</a>
+      </nav>
+    </header>
 
-      <section class="hero">
-        <div class="hero-main">
-          <div class="hero-main-inner">
-            <div class="hero-kicker">
-              <span class="hero-kicker-dot"></span>
-              <span>Enterprise React UI library</span>
+    <section id="overview" class="hero">
+      <div class="hero-main">
+        <div class="hero-inner">
+          <div class="hero-kicker">
+            <span class="hero-dot"></span>
+            <span>سرویس وب کامل شبیه DNSLab</span>
+          </div>
+          <h1 class="hero-title">
+            حل مشکل آی‌پی پویا، مدیریت DNS و انتشار سرویس‌های داخلی روی اینترنت، همه در یک پنل فارسی.
+          </h1>
+          <p class="hero-sub">
+            FaraDNS به کاربر اجازه می‌دهد ثبت‌نام کند، دامنه یا ساب‌دامنه بگیرد، رکوردهای A / AAAA / CNAME را
+            مدیریت کند و با یک لینک یا API ساده، آی‌پی پویا را از روی مودم، MikroTik، Raspberry Pi و هر دستگاه لینوکسی
+            به‌روز نگه دارد. بخش Reverse Proxy هم امکان انتشار سرویس‌های داخلی بدون آی‌پی ثابت را فراهم می‌کند.
+          </p>
+          <div class="hero-actions">
+            <a class="btn-primary" href="#panel">طرح پنل کاربری</a>
+            <a class="btn-ghost" href="#api">نمونه API و لینک آپدیت</a>
+          </div>
+          <div class="hero-meta">
+            <div class="hero-pill">
+              <span class="hero-pill-dot"></span>
+              <span>پشتیبانی از D‑Link / TP‑Link / MikroTik / Raspberry Pi</span>
             </div>
-            <h1 class="hero-title">
-              A production‑ready React + TypeScript design system for business web apps.
-            </h1>
-            <p class="hero-subtitle">
-              Atlas UI is a reusable component toolkit for internal tools and enterprise dashboards:
-              consistent theming, strong TypeScript types, SSR‑safe rendering, and built‑in
-              internationalization.
-            </p>
-            <div class="hero-actions">
-              <a class="btn-primary" href="#docs">
-                Browse docs & examples
-                <span>↗</span>
-              </a>
-              <a class="btn-ghost" href="#structure">
-                View repo layout
-              </a>
+            <div class="hero-pill">
+              <span class="hero-pill-dot"></span>
+              <span>رابط کاربری کاملاً فارسی، سریع و واکنش‌گرا</span>
             </div>
-            <div class="hero-meta">
-              <div class="hero-meta-pill">
-                <span class="hero-meta-dot"></span>
-                <span>React 18 · TypeScript · Vite / Next.js compatible</span>
-              </div>
-              <div class="hero-meta-pill">
-                <span class="hero-meta-dot"></span>
-                <span>Token‑based theming · CSS variables · dark mode</span>
-              </div>
-              <div class="hero-meta-pill">
-                <span class="hero-meta-dot"></span>
-                <span>i18n for multi‑language teams</span>
-              </div>
+            <div class="hero-pill">
+              <span class="hero-pill-dot"></span>
+              <span>Reverse Proxy برای TCP / UDP / HTTP</span>
             </div>
           </div>
         </div>
+      </div>
 
-        <aside class="hero-side">
-          <div class="card">
-            <div class="card-header">
-              <div class="card-title">Core guarantees</div>
-              <span class="card-badge">Production ready</span>
-            </div>
-            <div class="card-body">
-              <ul class="list">
-                <li>
-                  <span class="list-label">TypeScript‑first:</span>
-                  strict props, generics for data‑heavy components, and typed theme tokens.
-                </li>
-                <li>
-                  <span class="list-label">SSR‑safe:</span>
-                  no browser‑only globals in render paths; tested with Next.js and Remix.
-                </li>
-                <li>
-                  <span class="list-label">Accessibility:</span>
-                  ARIA‑compliant focus management, keyboard navigation, and semantic markup.
-                </li>
-                <li>
-                  <span class="list-label">Modern browsers:</span>
-                  evergreen browser support with graceful degradation for older engines.
-                </li>
-              </ul>
-            </div>
+      <aside class="hero-side">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">قابلیت‌های اصلی</div>
+            <span class="card-badge">Dynamic DNS</span>
           </div>
-
-          <div class="card">
-            <div class="card-header">
-              <div class="card-title">Design system scope</div>
-              <span class="card-badge">Full toolkit</span>
-            </div>
-            <div class="card-body">
-              <div class="chip-row">
-                <div class="chip">
-                  <span class="chip-dot"></span>
-                  Buttons, inputs, forms
-                </div>
-                <div class="chip">
-                  <span class="chip-dot"></span>
-                  Tables, data grids, filters
-                </div>
-                <div class="chip">
-                  <span class="chip-dot"></span>
-                  Modals, drawers, overlays
-                </div>
-                <div class="chip">
-                  <span class="chip-dot"></span>
-                  Navigation, layout primitives
-                </div>
-                <div class="chip">
-                  <span class="chip-dot"></span>
-                  Feedback: toasts, banners, empty states
-                </div>
-              </div>
-            </div>
-          </div>
-        </aside>
-      </section>
-
-      <section id="components" class="section">
-        <h2 class="section-title">Component library</h2>
-        <p class="section-subtitle">
-          Atlas UI ships a large set of ready‑to‑use components with consistent tokens and behavior,
-          designed for business workflows.
-        </p>
-
-        <div class="layout">
-          <div>
-            <h3 class="section-title">Foundations & inputs</h3>
+          <div class="card-body">
             <ul class="list">
-              <li><span class="list-label">Buttons:</span> primary, secondary, subtle, destructive, icon‑only, loading states.</li>
-              <li><span class="list-label">Typography:</span> text, headings, labels, code, with semantic variants.</li>
-              <li><span class="list-label">Form field:</span> label, description, error, hint, and layout wrappers.</li>
-              <li><span class="list-label">Inputs:</span> text, number, textarea, select, checkbox, radio, switch.</li>
-              <li><span class="list-label">Date & time:</span> date picker, range picker, time input, timezone‑aware display.</li>
-              <li><span class="list-label">Upload:</span> file dropzone, progress, validation feedback.</li>
+              <li><span class="list-label">ثبت‌نام و احراز هویت:</span> حساب کاربری، تأیید ایمیل، توکن API.</li>
+              <li><span class="list-label">دامنه/ساب‌دامنه:</span> اختصاص hostname به هر کاربر، محدودیت تعداد.</li>
+              <li><span class="list-label">مدیریت رکورد:</span> A، AAAA، CNAME با TTL قابل تنظیم.</li>
+              <li><span class="list-label">آپدیت خودکار:</span> لینک ساده و API سازگار با DDNS مودم‌ها.</li>
+              <li><span class="list-label">لاگ و تاریخچه:</span> ثبت تغییرات آی‌پی و رکوردها با زمان دقیق.</li>
             </ul>
+          </div>
+        </div>
 
-            <div class="code-block">
-<pre><code>// Example: Button API (TypeScript)
-type ButtonVariant = "primary" | "secondary" | "ghost" | "danger" | "link";
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">Reverse Proxy</div>
+            <span class="card-badge">TCP / UDP / HTTP</span>
+          </div>
+          <div class="card-body">
+            <ul class="list">
+              <li><span class="list-label">انتشار سرویس داخلی:</span> بدون آی‌پی ثابت، با رزرو پورت یا مسیر.</li>
+              <li><span class="list-label">پروفایل‌ها:</span> پروفایل HTTP (هاست‌نیم)، TCP/UDP (پورت).</li>
+              <li><span class="list-label">امنیت:</span> محدودیت IP، نرخ درخواست، TLS برای HTTP.</li>
+            </ul>
+          </div>
+        </div>
+      </aside>
+    </section>
 
-interface ButtonProps extends React.ButtonHTMLAttributes&lt;HTMLButtonElement&gt; {
-  variant?: ButtonVariant;
-  size?: "sm" | "md" | "lg";
-  iconLeft?: React.ReactNode;
-  iconRight?: React.ReactNode;
-  loading?: boolean;
+    <section id="dns" class="section">
+      <h2 class="section-title">طراحی بخش DNS پویا</h2>
+      <p class="section-sub">
+        این بخش مسئول نگه‌داری رکوردهای DNS و به‌روزرسانی خودکار آی‌پی است تا کاربر بتواند با یک hostname ثابت
+        به شبکه خانگی یا سرور داخلی خود وصل شود.
+      </p>
+
+      <div class="grid">
+        <div>
+          <ul class="list">
+            <li>
+              <span class="list-label">مدل داده:</span>
+              کاربران، دامنه‌ها/ساب‌دامنه‌ها، رکوردها، توکن‌های API، لاگ آپدیت‌ها.
+            </li>
+            <li>
+              <span class="list-label">رکوردها:</span>
+              پشتیبانی از A، AAAA، CNAME (در صورت نیاز بعداً MX / TXT).
+            </li>
+            <li>
+              <span class="list-label">DNS Server:</span>
+              اجرای BIND / PowerDNS / CoreDNS با backend دیتابیس یا zoneهای تولیدی.
+            </li>
+            <li>
+              <span class="list-label">به‌روزرسانی:</span>
+              هر درخواست موفق API، رکورد A/AAAA را با آی‌پی جدید به‌روزرسانی می‌کند.
+            </li>
+            <li>
+              <span class="list-label">TTL:</span>
+              TTL پیش‌فرض پایین (مثلاً 60 ثانیه) برای واکنش سریع به تغییر آی‌پی.
+            </li>
+          </ul>
+        </div>
+        <div>
+          <div class="code">
+<pre><code>// جدول نمونه در دیتابیس (شبه SQL)
+users(id, email, password_hash, created_at)
+
+domains(
+  id, user_id, hostname,  -- مثلا: user1.faradns.ir
+  created_at, is_active
+)
+
+records(
+  id, domain_id, type,    -- A / AAAA / CNAME
+  name,                   -- @ یا www
+  value,                  -- IP یا hostname
+  ttl, created_at, updated_at
+)
+
+api_tokens(
+  id, user_id, token, label, last_used_at, created_at
+)
+
+update_logs(
+  id, domain_id, old_ip, new_ip, user_agent,
+  source, created_at      -- source: router, script, panel
+)</code></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="panel" class="section">
+      <h2 class="section-title">پنل کاربری فارسی</h2>
+      <p class="section-sub">
+        پنل باید تمیز، سریع و کاملاً فارسی باشد و وضعیت آی‌پی فعلی، رکوردها و تاریخچه آپدیت‌ها را به‌صورت لحظه‌ای
+        نمایش دهد.
+      </p>
+
+      <div class="grid">
+        <div>
+          <ul class="list">
+            <li><span class="list-label">داشبورد:</span> نمایش آی‌پی فعلی، آخرین زمان آپدیت، وضعیت DNS و Reverse Proxy.</li>
+            <li><span class="list-label">مدیریت دامنه:</span> لیست hostnameها، افزودن/حذف، محدودیت بر اساس پلن.</li>
+            <li><span class="list-label">مدیریت رکورد:</span> فرم ساده برای A / AAAA / CNAME با اعتبارسنجی.</li>
+            <li><span class="list-label">تاریخچه:</span> جدول لاگ آپدیت‌ها با فیلتر بر اساس تاریخ و آی‌پی.</li>
+            <li><span class="list-label">توکن API:</span> ساخت، غیرفعال‌سازی و مشاهده آخرین استفاده.</li>
+          </ul>
+        </div>
+        <div>
+          <div class="code">
+<pre><code>&lt;!-- اسکچ HTML ساده برای داشبورد --&gt;
+&lt;section class="card"&gt;
+  &lt;header class="card-header"&gt;
+    &lt;h3 class="card-title"&gt;وضعیت فعلی آی‌پی&lt;/h3&gt;
+    &lt;span class="card-badge"&gt;آنلاین&lt;/span&gt;
+  &lt;/header&gt;
+  &lt;div class="card-body"&gt;
+    &lt;p&gt;آی‌پی فعلی شما: &lt;strong&gt;203.0.113.42&lt;/strong&gt;&lt;/p&gt;
+    &lt;p&gt;آخرین آپدیت: ۱۴۰۵/۰۴/۳۰ - ۱۲:۳۴&lt;/p&gt;
+    &lt;p&gt;Hostname اصلی: &lt;strong&gt;home1.faradns.ir&lt;/strong&gt;&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="api" class="section">
+      <h2 class="section-title">API و لینک آپدیت برای مودم‌ها و اسکریپت‌ها</h2>
+      <p class="section-sub">
+        برای سازگاری با مودم‌های D‑Link، TP‑Link، MikroTik و دستگاه‌های لینوکسی، هم یک URL ساده شبیه سرویس‌های DDNS
+        و هم یک API JSON در نظر گرفته می‌شود.
+      </p>
+
+      <div class="grid">
+        <div>
+          <ul class="list">
+            <li>
+              <span class="list-label">لینک ساده:</span>
+              مناسب مودم‌هایی که فقط URL سفارشی DDNS می‌پذیرند.
+            </li>
+            <li>
+              <span class="list-label">API JSON:</span>
+              برای اسکریپت‌های شخصی، Raspberry Pi و سرویس‌های بک‌اند.
+            </li>
+            <li>
+              <span class="list-label">احراز هویت:</span>
+              با توکن در query string یا هدر Authorization.
+            </li>
+            <li>
+              <span class="list-label">تشخیص آی‌پی:</span>
+              اگر آی‌پی ارسال نشود، از IP درخواست (X‑Forwarded‑For) استفاده می‌شود.
+            </li>
+          </ul>
+        </div>
+        <div>
+          <div class="code">
+<pre><code>// ۱) لینک ساده برای مودم‌ها (GET)
+https://api.faradns.ir/ddns/update?token=USER_TOKEN&amp;host=home1.faradns.ir
+
+// ۲) API JSON (POST)
+POST https://api.faradns.ir/v1/ddns/update
+Authorization: Bearer USER_TOKEN
+Content-Type: application/json
+
+{
+  "hostname": "home1.faradns.ir",
+  "ipv4": "203.0.113.42",   // اختیاری، در صورت نبود از آی‌پی درخواست استفاده می‌شود
+  "ipv6": "2001:db8::1234"  // اختیاری
 }
 
-export function Button({ variant = "primary", size = "md", ...props }: ButtonProps) {
-  // implementation uses design tokens + CSS variables
+// پاسخ نمونه
+{
+  "status": "ok",
+  "hostname": "home1.faradns.ir",
+  "old_ipv4": "203.0.113.10",
+  "new_ipv4": "203.0.113.42",
+  "updated_at": "2026-06-20T16:34:00Z"
 }</code></pre>
-            </div>
-          </div>
-
-          <div>
-            <h3 class="section-title">Data display & layout</h3>
-            <ul class="list">
-              <li><span class="list-label">Table:</span> sortable headers, column definitions, row selection, pagination, server data hooks.</li>
-              <li><span class="list-label">Data grid:</span> virtualized rows, column resizing, inline editing for heavy dashboards.</li>
-              <li><span class="list-label">Cards & panels:</span> surface containers with header, toolbar, and footer slots.</li>
-              <li><span class="list-label">Stack & grid:</span> layout primitives for spacing, alignment, and responsive breakpoints.</li>
-              <li><span class="list-label">Navigation:</span> app shell, sidebar, top bar, tabs, breadcrumbs, stepper.</li>
-              <li><span class="list-label">Feedback:</span> toast system, inline alerts, banners, skeleton loaders, empty states.</li>
-            </ul>
-
-            <div class="code-block">
-<pre><code>// Example: Table column typing
-export interface Column&lt;T&gt; {
-  id: string;
-  header: string;
-  accessor: (row: T) =&gt; React.ReactNode;
-  sortable?: boolean;
-  width?: number | "auto";
-}
-
-interface TableProps&lt;T&gt; {
-  columns: Column&lt;T&gt;[];
-  data: T[];
-  onSortChange?: (columnId: string, direction: "asc" | "desc") =&gt; void;
-}</code></pre>
-            </div>
           </div>
         </div>
-      </section>
+      </div>
 
-      <section id="theming" class="section">
-        <h2 class="section-title">Theming & tokens</h2>
-        <p class="section-subtitle">
-          Atlas UI uses a token‑based theme system built on CSS variables, enabling brand customization,
-          light/dark modes, and per‑tenant overrides.
-        </p>
+      <div class="grid" style="margin-top:14px;">
+        <div>
+          <h3 class="section-title">نمونه تنظیم روی MikroTik / Linux</h3>
+          <div class="code">
+<pre><code># اسکریپت ساده روی لینوکس / Raspberry Pi (bash)
+TOKEN="USER_TOKEN"
+HOST="home1.faradns.ir"
+curl "https://api.faradns.ir/ddns/update?token=$TOKEN&amp;host=$HOST"
 
-        <div class="layout">
-          <div>
-            <ul class="list">
-              <li><span class="list-label">Design tokens:</span> color, typography, spacing, radius, shadow, motion, z‑index.</li>
-              <li><span class="list-label">CSS variables:</span> exposed under <code>--atlas-*</code> for runtime overrides.</li>
-              <li><span class="list-label">Theme object:</span> strongly typed in TypeScript for editor autocompletion.</li>
-              <li><span class="list-label">Dark mode:</span> class‑based or media‑query‑based switching with smooth transitions.</li>
-              <li><span class="list-label">Per‑app themes:</span> wrap dashboards in <code>&lt;AtlasThemeProvider&gt;</code> with custom tokens.</li>
-            </ul>
-          </div>
-          <div>
-            <div class="code-block">
-<pre><code>// Example: theme typing
-export interface AtlasColorScale {
-  50: string;
-  100: string;
-  200: string;
-  300: string;
-  400: string;
-  500: string;
-  600: string;
-  700: string;
-  800: string;
-  900: string;
-}
-
-export interface AtlasTheme {
-  primary: AtlasColorScale;
-  accent: AtlasColorScale;
-  neutral: AtlasColorScale;
-  radius: { sm: number; md: number; lg: number; pill: number };
-  shadow: { soft: string; strong: string };
-}
-
-declare module "atlas-ui" {
-  export function AtlasThemeProvider(props: { theme: Partial&lt;AtlasTheme&gt;; children: React.ReactNode }): JSX.Element;
-}</code></pre>
-            </div>
+# کرون‌جاب هر ۵ دقیقه
+*/5 * * * * /usr/local/bin/faradns-update.sh &gt;&gt; /var/log/faradns.log 2&gt;&amp;1</code></pre>
           </div>
         </div>
-      </section>
+        <div>
+          <h3 class="section-title">الگوی URL برای مودم‌ها</h3>
+          <div class="code">
+<pre><code>// TP-Link / D-Link (Custom DDNS URL)
+Server / URL:
+https://api.faradns.ir/ddns/update?token=USER_TOKEN&amp;host=home1.faradns.ir
 
-      <section id="i18n" class="section">
-        <h2 class="section-title">Internationalization</h2>
-        <p class="section-subtitle">
-          Built‑in i18n support lets teams ship internal tools in many languages without rewriting
-          components. Atlas UI integrates cleanly with popular libraries like <code>react-i18next</code>.
-        </p>
+// در صورت نیاز به فرمت DynDNS:
+https://api.faradns.ir/dyndns/update?hostname=%h&amp;myip=%i&amp;token=USER_TOKEN
 
-        <div class="layout">
-          <div>
-            <ul class="list">
-              <li><span class="list-label">Language context:</span> <code>&lt;AtlasI18nProvider&gt;</code> exposes current locale and helpers.</li>
-              <li><span class="list-label">Translation keys:</span> components use stable keys, not hard‑coded strings.</li>
-              <li><span class="list-label">Plural & formatting:</span> delegates to i18n engine for pluralization, dates, numbers.</li>
-              <li><span class="list-label">SSR‑friendly:</span> hydration‑safe language loading for Next.js and other SSR frameworks.</li>
-              <li><span class="list-label">Fallbacks:</span> graceful fallback to default locale when translations are missing.</li>
-            </ul>
-          </div>
-          <div>
-            <div class="code-block">
-<pre><code>// Example: using Atlas UI with react-i18next
-import { useTranslation } from "react-i18next";
-import { Button } from "atlas-ui";
-
-function SaveButton() {
-  const { t } = useTranslation("common");
-  return &lt;Button variant="primary"&gt;{t("actions.save")}&lt;/Button&gt;;
-}</code></pre>
-            </div>
+// MikroTik (tool fetch)
+:global token "USER_TOKEN";
+:global host "home1.faradns.ir";
+ /tool fetch url=("https://api.faradns.ir/ddns/update?token=$token&amp;host=$host") keep-result=no;</code></pre>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <section id="docs" class="section">
-        <h2 class="section-title">Docs site</h2>
-        <p class="section-subtitle">
-          The documentation site is a React app (e.g. Vite or Next.js) that showcases every component
-          with live examples, props tables, and usage guidelines.
-        </p>
+    <section id="reverse-proxy" class="section">
+      <h2 class="section-title">بخش Reverse Proxy برای TCP / UDP / HTTP</h2>
+      <p class="section-sub">
+        این بخش به کاربر اجازه می‌دهد سرویس‌های داخلی (مثلاً وب‌سرور، SSH، دیتابیس یا سرویس UDP) را بدون آی‌پی ثابت
+        روی اینترنت منتشر کند. کاربر می‌تواند پورت یا آدرس دلخواه رزرو کند.
+      </p>
 
-        <div class="layout">
-          <div>
-            <ul class="list">
-              <li><span class="list-label">Overview:</span> high‑level introduction, design principles, and quick start guide.</li>
-              <li><span class="list-label">Component pages:</span> each component has usage, props, accessibility notes, and code samples.</li>
-              <li><span class="list-label">Playground:</span> interactive controls to tweak props and see live behavior.</li>
-              <li><span class="list-label">Theming guide:</span> how to define custom themes, brand colors, and dark mode.</li>
-              <li><span class="list-label">Integration recipes:</span> examples for Next.js, Remix, CRA, and SSR setups.</li>
-            </ul>
-          </div>
-          <div>
-            <div class="code-block">
-<pre><code>// Example: docs routing structure (React Router)
-&lt;Routes&gt;
-  &lt;Route path="/" element={&lt;OverviewPage /&gt;} /&gt;
-  &lt;Route path="/components/button" element={&lt;ButtonDocs /&gt;} /&gt;
-  &lt;Route path="/components/table" element={&lt;TableDocs /&gt;} /&gt;
-  &lt;Route path="/guides/theming" element={&lt;ThemingGuide /&gt;} /&gt;
-  &lt;Route path="/guides/i18n" element={&lt;I18nGuide /&gt;} /&gt;
-&lt;/Routes&gt;</code></pre>
-            </div>
+      <div class="grid">
+        <div>
+          <ul class="list">
+            <li>
+              <span class="list-label">HTTP Reverse Proxy:</span>
+              تعریف hostname (مثلاً app1.faradns.ir) و مقصد داخلی (مثلاً 192.168.1.10:8080) با TLS.
+            </li>
+            <li>
+              <span class="list-label">TCP Proxy:</span>
+              رزرو پورت روی سرور (مثلاً 20022) و هدایت به 192.168.1.10:22 برای SSH.
+            </li>
+            <li>
+              <span class="list-label">UDP Proxy:</span>
+              برای سرویس‌هایی مثل VoIP یا بازی‌ها، با محدودیت نرخ و فایروال مناسب.
+            </li>
+            <li>
+              <span class="list-label">Health Check:</span>
+              بررسی در دسترس بودن مقصد داخلی و نمایش وضعیت در پنل.
+            </li>
+          </ul>
+        </div>
+        <div>
+          <div class="code">
+<pre><code>// مدل داده ساده برای Reverse Proxy
+reverse_endpoints(
+  id, user_id,
+  type,            -- http / tcp / udp
+  public_host,     -- برای http (مثلا app1.faradns.ir)
+  public_port,     -- برای tcp/udp (مثلا 20022)
+  internal_ip,     -- 192.168.1.10
+  internal_port,   -- 22 / 8080 / ...
+  protocol,        -- tcp / udp / http
+  is_tls,          -- برای http
+  created_at, updated_at, is_active
+)</code></pre>
           </div>
         </div>
-      </section>
+      </div>
 
-      <section id="structure" class="section">
-        <h2 class="section-title">Repository structure</h2>
-        <p class="section-subtitle">
-          The repo is organized to keep components, docs, and tests aligned. If an existing structure
-          is present, Atlas UI extends it rather than replacing it.
-        </p>
+      <div class="grid" style="margin-top:14px;">
+        <div>
+          <h3 class="section-title">نمونه سناریو HTTP</h3>
+          <div class="code">
+<pre><code>// کاربر در پنل تعریف می‌کند:
+نوع: HTTP
+دامنه عمومی: app1.faradns.ir
+مقصد داخلی: 192.168.1.10:8080
+TLS: فعال (Let's Encrypt)
 
-        <div class="layout">
-          <div>
-            <ul class="list">
-              <li><span class="list-label">packages/atlas-ui:</span> core component library (React + TypeScript).</li>
-              <li><span class="list-label">packages/atlas-theme:</span> shared tokens, CSS variables, and theme helpers.</li>
-              <li><span class="list-label">apps/docs:</span> documentation site with live examples and playgrounds.</li>
-              <li><span class="list-label">tests:</span> unit tests (Jest / Vitest) and visual regression (Storybook / Playwright).</li>
-              <li><span class="list-label">.storybook:</span> optional Storybook setup for component‑level exploration.</li>
-            </ul>
-          </div>
-          <div>
-            <div class="code-block">
-<pre><code>// Example: high-level folder layout
-root/
-  packages/
-    atlas-ui/
-      src/
-        components/
-          button/
-          input/
-          table/
-          modal/
-          layout/
-          feedback/
-        hooks/
-        utils/
-        index.ts
-      tests/
-    atlas-theme/
-      src/
-        tokens/
-        css/
-        index.ts
-  apps/
-    docs/
-      src/
-        pages/
-        components/
-        examples/
-  .storybook/
-  tsconfig.json
-  package.json</code></pre>
-            </div>
+// سرور Reverse Proxy (مثلاً Nginx / Envoy / Traefik)
+// بر اساس تنظیمات دیتابیس، روت مناسب را ایجاد می‌کند.</code></pre>
           </div>
         </div>
-      </section>
+        <div>
+          <h3 class="section-title">نمونه سناریو TCP</h3>
+          <div class="code">
+<pre><code>// کاربر در پنل تعریف می‌کند:
+نوع: TCP
+پورت عمومی: 20022
+مقصد داخلی: 192.168.1.10:22
 
-      <footer>
-        <span>Atlas UI · React design system for internal tools & enterprise dashboards.</span>
-        <span>Ready to be wired into your existing repo structure and CI pipeline.</span>
-      </footer>
-    </div>
+// سرور لبه (Edge) روی پورت 20022 گوش می‌دهد و ترافیک را
+// به 192.168.1.10:22 تونل می‌کند (مثلاً با HAProxy / Envoy).</code></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="arch" class="section">
+      <h2 class="section-title">معماری کلی سرویس</h2>
+      <p class="section-sub">
+        در این طرح، سرویس به چند بخش اصلی تقسیم می‌شود تا هم مقیاس‌پذیر باشد و هم نگه‌داری آن ساده بماند.
+      </p>
+
+      <div class="grid">
+        <div>
+          <ul class="list">
+            <li><span class="list-label">وب‌اپ و پنل:</span> Frontend (مثلاً React / Next.js) با رابط فارسی و RTL.</li>
+            <li><span class="list-label">Backend API:</span> سرویس REST/GraphQL برای مدیریت کاربران، DNS و Reverse Proxy.</li>
+            <li><span class="list-label">DNS Server:</span> سرویس جداگانه (BIND / PowerDNS / CoreDNS) متصل به دیتابیس.</li>
+            <li><span class="list-label">Reverse Proxy Edge:</span> خوشه Nginx / Envoy / Traefik برای HTTP/TCP/UDP.</li>
+            <li><span class="list-label">Queue / Worker:</span> برای صدور/تمدید TLS، اعمال تغییرات DNS و لاگ‌ها.</li>
+            <li><span class="list-label">مانیتورینگ:</span> متریک‌ها، لاگ مرکزی، آلارم برای خطاهای DNS و Proxy.</li>
+          </ul>
+        </div>
+        <div>
+          <div class="code">
+<pre><code>clients (router, script, browser)
+        |
+        v
++---------------------+
+|  API Gateway / LB   |
++---------------------+
+   |            |
+   v            v
+Backend API   Reverse Proxy Edge (HTTP/TCP/UDP)
+   |
+   v
+Database  &lt;--&gt;  DNS Server (BIND / PowerDNS / CoreDNS)
+   |
+   v
+Workers (TLS, logs, health checks)</code></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <span>FaraDNS – طرح یک سرویس وب کامل برای DNS پویا و Reverse Proxy مخصوص کاربران فارسی‌زبان.</span>
+      <span>این سند HTML، اسکچ معماری، API و پنل را برای پیاده‌سازی عملی آماده می‌کند.</span>
+    </footer>
   </div>
+</div>
 </body>
 </html>
