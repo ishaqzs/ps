@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ps">
+<html lang="ps" dir="rtl">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -18,33 +18,20 @@
       overflow-x: hidden;
       transition: background 0.3s ease;
     }
-/* RTL layout for Pashto */
-.rtl .content {
-  text-align: right;
-}
 
-.rtl .topbar {
-  direction: rtl;
-}
-
-.rtl .sidebar {
-  direction: rtl;
-}
-
-    /* SIDEBAR BASE */
+    /* SIDEBAR */
     .sidebar {
       width: 260px;
       background: #f8f9fa;
-      border-right: 1px solid #ddd;
+      border-left: 1px solid #ddd;
       padding: 20px;
-      transition: width 0.3s ease, left 0.3s ease;
+      transition: width 0.3s ease, right 0.3s ease;
     }
 
-    /* SIDEBAR MINIMIZED (PC) */
+    /* MINIMIZED SIDEBAR */
     .sidebar.minimized {
       width: 80px;
     }
-
     .sidebar.minimized .text-label {
       display: none;
     }
@@ -53,13 +40,13 @@
     @media (max-width: 991px) {
       .sidebar {
         position: fixed;
-        left: -260px;
+        right: -260px;
         top: 0;
         height: 100%;
         z-index: 1000;
       }
       .sidebar.sidebar-visible {
-        left: 0;
+        right: 0;
       }
     }
 
@@ -67,12 +54,12 @@
     .content {
       flex: 1;
       padding: 20px;
-      transition: margin-left 0.3s ease;
+      transition: margin-right 0.3s ease;
+      text-align: right;
     }
 
-    /* SHIFT CONTENT WHEN SIDEBAR MINIMIZED */
     .content.shifted {
-      margin-left: 80px;
+      margin-right: 80px;
     }
 
     /* TOPBAR */
@@ -86,6 +73,7 @@
       position: sticky;
       top: 0;
       z-index: 900;
+      direction: rtl;
     }
 
     /* DARK MODE */
@@ -101,6 +89,23 @@
       background: #2b2b2b;
       border-color: #444;
     }
+
+    /* LTR MODE WHEN ENGLISH IS SELECTED */
+    .ltr {
+      direction: ltr;
+      text-align: left;
+    }
+    .ltr .sidebar {
+      border-right: 1px solid #ddd;
+      border-left: none;
+    }
+    .ltr .content {
+      text-align: left;
+      margin-left: 0;
+    }
+    .ltr .topbar {
+      direction: ltr;
+    }
   </style>
 </head>
 
@@ -108,16 +113,16 @@
 
   <!-- SIDEBAR -->
   <aside class="sidebar" id="sidebar">
-    <h5 class="mb-3 text-label" id="sb_title">نور مالومات</h5>
+    <h5 class="mb-3 text-label" id="sb_title">لړۍ</h5>
 
     <button class="btn btn-sm btn-outline-secondary w-100 mb-3" id="minimizeSidebarBtn">
-      <i class="fa-solid fa-angles-left"></i>
+      <i class="fa-solid fa-angles-right"></i>
       <span class="text-label" id="sb_minimize">لږول</span>
     </button>
 
     <ul class="list-unstyled">
-      <li><i class="fa-solid fa-house me-2"></i> <span class="text-label" id="sb_dashboard">د پښتو اړوند</span></li>
-      <li><i class="fa-solid fa-calendar me-2"></i> <span class="text-label" id="sb_calendar">نامتو پښتانګ</span></li>
+      <li><i class="fa-solid fa-house me-2"></i> <span class="text-label" id="sb_dashboard">د پښتو په اړه</span></li>
+      <li><i class="fa-solid fa-calendar me-2"></i> <span class="text-label" id="sb_calendar">پښتانه</span></li>
       <li><i class="fa-solid fa-table me-2"></i> <span class="text-label" id="sb_table">د پښتنو سيمو اړوند</span></li>
       <li><i class="fa-solid fa-file me-2"></i> <span class="text-label" id="sb_pages">تاريخي پښتو اسناد</span></li>
       <li><i class="fa-solid fa-gear me-2"></i> <span class="text-label" id="sb_settings">سيټینګ</span></li>
@@ -141,7 +146,7 @@
         <!-- Theme toggle -->
         <button class="btn btn-sm btn-outline-secondary" id="themeToggleBtn">
           <i class="fa-regular fa-moon me-1"></i>
-          <span class="d-none d-sm-inline" id="tb_theme">تاريکه</span>
+          <span class="d-none d-sm-inline" id="tb_theme">تاريکه کول</span>
         </button>
 
         <!-- Language selector -->
@@ -161,10 +166,10 @@
 
     <!-- WELCOME TEXT -->
     <div class="mt-4">
-      <h2 id="welcomeText">خدای دې راوله</h2>
+      <h2 id="welcomeText">خدای مو راوله</h2>
       <p id="welcomeSubText">
-پر هر کاغذ، پر هر دېوال، هم یې په مځکه ليکم
-زه پر پښتو باندې مین یم پښتو ځکه ليکم </p>
+        پر هر کاغذ، پر هر دېوال، هم یې په مځکه ليکم زه پر پښتو باندې مین یم پښتو ځکه ليکم
+      </p>
     </div>
 
   </main>
@@ -175,19 +180,13 @@
   <script>
     const sidebar = document.getElementById("sidebar");
     const content = document.getElementById("content");
-if (lang === "ar") {
-  document.body.setAttribute("dir", "rtl");
-  document.body.classList.add("rtl");
-} else {
-  document.body.setAttribute("dir", "ltr");
-  document.body.classList.remove("rtl");
-}
-    /* MOBILE SIDEBAR TOGGLE */
+
+    /* MOBILE SIDEBAR */
     document.getElementById("mobileSidebarBtn").addEventListener("click", () => {
       sidebar.classList.toggle("sidebar-visible");
     });
 
-    /* PC SIDEBAR MINIMIZE */
+    /* MINIMIZE SIDEBAR */
     document.getElementById("minimizeSidebarBtn").addEventListener("click", () => {
       sidebar.classList.toggle("minimized");
       content.classList.toggle("shifted");
@@ -200,8 +199,25 @@ if (lang === "ar") {
 
     /* FULL MULTILINGUAL SYSTEM */
     const ui = {
+      ps: {
+        sb_title: "لړۍ",
+        sb_minimize: "لږول",
+        sb_dashboard: "د پښتو په اړه",
+        sb_calendar: "پښتانه",
+        sb_table: "د پښتنو سيمو اړوند",
+        sb_pages: "تاريخي پښتو اسناد",
+        sb_settings: "سيټینګ",
+
+        tb_title: "پښتو",
+        tb_theme: "تاريکه کول",
+        tb_language: "ژبه",
+
+        welcomeText: "خدای مو راوله",
+        welcomeSubText: "پر هر کاغذ، پر هر دېوال، هم یې په مځکه ليکم زه پر پښتو باندې مین یم پښتو ځکه ليکم"
+      },
+      
       en: {
-        sb_title: "Admin Starter",
+        sb_title: "Admin Panel",
         sb_minimize: "Minimize",
         sb_dashboard: "Dashboard",
         sb_calendar: "Calendar",
@@ -210,28 +226,11 @@ if (lang === "ar") {
         sb_settings: "Settings",
 
         tb_title: "Dashboard",
-        tb_theme: "Dark",
+        tb_theme: "Dark Mode",
         tb_language: "Language",
 
         welcomeText: "Welcome",
         welcomeSubText: "Your advanced dashboard layout is ready."
-      },
-
-      ps: {
-        sb_title: "لوحة الإدارة",
-        sb_minimize: "تصغير",
-        sb_dashboard: "الرئيسية",
-        sb_calendar: "التقويم",
-        sb_table: "جدول البيانات",
-        sb_pages: "الصفحات",
-        sb_settings: "الإعدادات",
-
-        tb_title: "الرئيسية",
-        tb_theme: "داكن",
-        tb_language: "اللغة",
-
-        welcomeText: "مرحباً",
-        welcomeSubText: "لوحة التحكم المتقدمة الخاصة بك جاهزة."
       }
     };
 
@@ -240,27 +239,13 @@ if (lang === "ar") {
         const el = document.getElementById(key);
         if (el) el.textContent = ui[lang][key];
       }
-<style>
-  /* your existing CSS... */
 
-  /* ADD THIS AT THE BOTTOM */
-  .rtl .content {
-    text-align: right;
-  }
-
-  .rtl .topbar {
-    direction: rtl;
-  }
-
-  .rtl .sidebar {
-    direction: rtl;
-  }
-</style>
-      // RTL support
       if (lang === "ps") {
         document.body.setAttribute("dir", "rtl");
+        document.body.classList.remove("ltr");
       } else {
         document.body.setAttribute("dir", "ltr");
+        document.body.classList.add("ltr");
       }
     }
 
