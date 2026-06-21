@@ -2,7 +2,7 @@
 <html lang="ps" dir="rtl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport"width="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>پښتو</title>
 
   <!-- Font -->
@@ -86,6 +86,11 @@
       flex: 1;
     }
 
+    /* ⭐ SPACING ADDED HERE */
+    .topbar-left {
+      gap: 10px;
+    }
+
     /* RTL ORDER (Pashto) */
     body.rtl .flex-order-1 { order: 1; justify-content: flex-start; }
     body.rtl .flex-order-2 { order: 2; justify-content: center; }
@@ -116,7 +121,7 @@
       transition: max-height 0.3s ease;
     }
     #searchBarWrapper.open {
-      max-height: 120px;
+      max-height: 200px;
     }
 
     #searchInput {
@@ -183,6 +188,57 @@
         0 3px 12px rgba(0,0,0,0.55),
         0 0 25px rgba(0,150,255,0.25);
     }
+
+    /* MOBILE FIXES */
+    @media (max-width: 600px) {
+
+      .topbar {
+        padding: 6px 12px;
+      }
+
+      .flex-order-1,
+      .flex-order-2,
+      .flex-order-3 {
+        flex: unset;
+      }
+
+      .topbar-center img {
+        height: 26px;
+      }
+
+      .topbar-left button,
+      .topbar-left .dropdown-toggle {
+        padding: 3px 6px;
+        font-size: 12px;
+      }
+
+      .topbar-right button {
+        padding: 3px 8px;
+        font-size: 12px;
+      }
+
+      /* ⭐ MOBILE SPACING */
+      .topbar-left {
+        gap: 6px;
+      }
+
+      #searchInput {
+        font-size: 16px;
+        padding: 12px 40px 12px 12px;
+      }
+
+      #searchResults {
+        font-size: 15px;
+      }
+
+      .hero-container {
+        height: 260px;
+      }
+
+      #welcomeText {
+        font-size: 34px;
+      }
+    }
   </style>
 </head>
 
@@ -214,7 +270,7 @@
       <div class="topbar-inner">
 
         <!-- LEFT (Pashto) / RIGHT (English): Theme + Language -->
-        <div class="flex-order-1">
+        <div class="flex-order-1 topbar-left">
           <button class="btn btn-sm btn-outline-secondary" id="themeToggleBtn">
             <i class="fa-regular fa-moon me-1"></i>
             <span class="d-none d-sm-inline" id="tb_theme">تاريکه کول</span>
@@ -233,14 +289,14 @@
         </div>
 
         <!-- CENTER: Logo -->
-        <div class="flex-order-2">
+        <div class="flex-order-2 topbar-center">
           <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/The_Pashto.png"
                alt="Logo"
                style="height:32px; width:auto;">
         </div>
 
         <!-- RIGHT (Pashto) / LEFT (English): Search Button -->
-        <div class="flex-order-3">
+        <div class="flex-order-3 topbar-right">
           <button class="btn btn-sm btn-outline-secondary" id="searchToggleBtn">
             <i class="fa-solid fa-magnifying-glass me-1"></i>
             <span id="searchButtonLabel">لټون</span>
