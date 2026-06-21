@@ -15,6 +15,19 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 
   <style>
+    #searchResults {
+  width: calc(100% - 40px); /* same margin as searchInput */
+  margin: 0 auto;
+  position: relative;
+  z-index: 9999;
+  background: white;
+  padding: 10px;
+  border-radius: 8px;
+}
+body.dark-mode #searchResults {
+  background: #1e1e1e;
+}
+
   #searchResults {
   position: relative;
   z-index: 9999;
