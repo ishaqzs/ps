@@ -2,170 +2,79 @@
 <html lang="ps" dir="rtl">
 <head>
   <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>پښتو</title>
 
   <!-- Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;200;300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@200;300;400;500;600&display=swap" rel="stylesheet">
 
   <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
-  <!-- FontAwesome -->
+  <!-- Icons -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
 
   <style>
+    * {
+      box-sizing: border-box;
+      pointer-events: auto;
+    }
+
     body {
-      display: flex;
-      min-height: 100vh;
-      overflow-x: hidden;
-      transition: background 0.3s ease;
+      margin: 0;
       font-family: 'Vazirmatn', sans-serif;
-      font-weight: 300;
+      background: #ffffff;
+      color: #111;
+      transition: background 0.3s ease, color 0.3s ease;
     }
 
-    .content {
-      flex: 1;
-      padding: 20px;
-      text-align: right;
-      transition: margin-right 0.3s ease;
+    body.dark-mode {
+      background: #1e1e1e;
+      color: #eee;
     }
 
-    .sidebar {
-      width: 260px;
-      background: #f8f9fa;
-      border-left: 1px solid #ddd;
-      padding: 20px;
-      transition: width 0.3s ease, right 0.3s ease;
-    }
-
-    .sidebar.minimized {
-      width: 80px;
-    }
-    .sidebar.minimized .text-label {
-      display: none;
-    }
-
-    @media (max-width: 991px) {
-      .sidebar {
-        position: fixed;
-        right: -260px;
-        top: 0;
-        height: 100%;
-        z-index: 1000;
-      }
-      .sidebar.sidebar-visible {
-        right: 0;
-      }
-    }
-
-    .content.shifted {
-      margin-right: 80px;
-    }
-
+    /* TOPBAR */
     .topbar {
       background: #fff;
       border-bottom: 1px solid #ddd;
       padding: 10px 20px;
       position: sticky;
       top: 0;
-      z-index: 900;
-    }
-
-    .topbar-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .flex-order-1,
-    .flex-order-2,
-    .flex-order-3 {
-      display: flex;
-      align-items: center;
-      flex: 1;
-    }
-
-    /* ⭐ SPACING ADDED HERE */
-    .topbar-left {
-      gap: 10px;
-    }
-
-    /* RTL ORDER (Pashto) */
-    body.rtl .flex-order-1 { order: 1; justify-content: flex-start; }
-    body.rtl .flex-order-2 { order: 2; justify-content: center; }
-    body.rtl .flex-order-3 { order: 3; justify-content: flex-end; }
-
-    /* LTR ORDER (English) */
-    body.ltr .flex-order-1 { order: 3; justify-content: flex-end; }
-    body.ltr .flex-order-2 { order: 2; justify-content: center; }
-    body.ltr .flex-order-3 { order: 1; justify-content: flex-start; }
-
-    body.dark-mode {
-      background: #1e1e1e;
-      color: #eee;
+      z-index: 1000;
     }
     body.dark-mode .topbar {
       background: #2b2b2b;
       border-color: #444;
     }
-    body.dark-mode .sidebar {
-      background: #2b2b2b;
-      border-color: #444;
+
+    .topbar-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
-    /* Slide-down search bar */
-    #searchBarWrapper {
-      overflow: hidden;
-      max-height: 0;
-      transition: max-height 0.3s ease;
-    }
-    #searchBarWrapper.open {
-      max-height: 200px;
-    }
-
-    #searchInput {
-      padding-right: 40px;
-      border-radius: 24px;
-    }
-
-    #searchBarWrapper .search-icon {
-      position: absolute;
-      top: 50%;
-      right: 14px;
-      transform: translateY(-50%);
-      color: #666;
-    }
-
-    #searchInput:focus {
-      box-shadow: 0 0 12px rgba(0,150,255,0.5);
-    }
-
-    #searchResults div {
-      animation: fadeIn 0.3s ease;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(5px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .hero-container {
+    /* HERO */
+    .hero {
       position: relative;
-      width: 100%;
-      height: 380px;
-      background-image: url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee');
-      background-size: cover;
-      background-position: center;
+      height: 420px;
       border-radius: 12px;
       overflow: hidden;
-      margin-top: 20px;
+      margin: 20px;
+      background-image: url('https://images.unsplash.com/photo-1501785888041-af3ef285b470');
+      background-size: cover;
+      background-position: center;
     }
 
-    .hero-overlay {
+    .hero::after {
+      content: "";
       position: absolute;
       inset: 0;
-      background: rgba(0,0,0,0.45);
-      backdrop-filter: blur(2px);
+      background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.55),
+        rgba(0,0,0,0.35)
+      );
+      pointer-events: none;
     }
 
     .hero-content {
@@ -173,306 +82,458 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 100%;
-      max-width: 600px;
       text-align: center;
       color: white;
+      width: 100%;
+      max-width: 600px;
+      z-index: 2;
     }
 
     #welcomeText {
-      font-size: 50px;
+      font-size: 48px;
       font-weight: 700;
-      letter-spacing: 1.5px;
-      margin-bottom: 25px;
-      text-shadow:
-        0 3px 12px rgba(0,0,0,0.55),
-        0 0 25px rgba(0,150,255,0.25);
+      margin-bottom: 20px;
+      text-shadow: 0 3px 12px rgba(0,0,0,0.6);
     }
 
-    /* MOBILE FIXES */
+    /* SEARCH-STYLE BUTTON */
+    .hero-search-btn {
+      background: white;
+      color: #333;
+      padding: 12px 20px;
+      border-radius: 30px;
+      width: 260px;
+      margin: 0 auto;
+      cursor: pointer;
+      font-size: 17px;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      position: relative;
+      z-index: 3;
+    }
+
+    .hero-options {
+      display: none;
+      margin-top: 12px;
+      background: rgba(0,0,0,0.45);
+      backdrop-filter: blur(3px);
+      border-radius: 12px;
+      padding: 10px;
+      position: relative;
+      z-index: 3;
+    }
+
+    .hero-options a {
+      display: block;
+      padding: 8px;
+      color: white;
+      text-decoration: none;
+      font-size: 16px;
+    }
+
+    .hero-options a:hover {
+      text-decoration: underline;
+    }
+
+    /* SEARCH BAR */
+    #searchBarWrapper {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      border-bottom: 1px solid #eee;
+    }
+
+    #searchInput {
+      margin: 10px 20px 15px 20px;
+    }
+
+    /* USP BAR */
+    .usp-box {
+      background: #b30000;
+      color: white;
+      padding: 25px;
+      border-radius: 12px;
+      max-width: 900px;
+      margin: 30px auto;
+      text-align: center;
+    }
+
+    .usp {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 18px;
+      align-items: center;
+    }
+
+    .usp img {
+      width: 32px;
+      filter: brightness(0) invert(1);
+    }
+
+    /* MUST-SEES */
+    .must-sees {
+      max-width: 1100px;
+      margin: 40px auto 80px auto;
+      text-align: center;
+      padding: 0 20px;
+    }
+
+    .mosaic {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-top: 20px;
+    }
+
+    .tile {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .tile img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .callout-ribbon {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: #b30000;
+      color: white;
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 13px;
+      z-index: 10;
+      white-space: nowrap;
+    }
+
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);
+      opacity: 0;
+      transition: 0.3s;
+    }
+
+    .tile:hover .overlay {
+      opacity: 1;
+    }
+
+    .textbox {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      color: white;
+    }
+
+    /* FOOTER (HIDDEN UNTIL BOTTOM) */
+    .footer-fixed {
+      position: fixed;
+      bottom: 10px;
+      left: 50%;
+      transform: translate(-50%, 40px);
+      opacity: 0;
+      transition: all 0.4s ease;
+      font-size: 14px;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    .footer-visible {
+      transform: translate(-50%, 0);
+      opacity: 1;
+    }
+
+    /* MOBILE */
     @media (max-width: 600px) {
-
-      .topbar {
-        padding: 6px 12px;
-      }
-
-      .flex-order-1,
-      .flex-order-2,
-      .flex-order-3 {
-        flex: unset;
-      }
-
-      .topbar-center img {
-        height: 26px;
-      }
-
-      .topbar-left button,
-      .topbar-left .dropdown-toggle {
-        padding: 3px 6px;
-        font-size: 12px;
-      }
-
-      .topbar-right button {
-        padding: 3px 8px;
-        font-size: 12px;
-      }
-
-      /* ⭐ MOBILE SPACING */
-      .topbar-left {
-        gap: 6px;
-      }
-
-      #searchInput {
-        font-size: 16px;
-        padding: 12px 40px 12px 12px;
-      }
-
-      #searchResults {
-        font-size: 15px;
-      }
-
-      .hero-container {
-        height: 260px;
-      }
-
-      #welcomeText {
-        font-size: 34px;
-      }
+      #welcomeText { font-size: 34px; }
+      .hero { margin: 10px; height: 340px; }
+      .mosaic { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 
 <body class="rtl">
 
-  <!-- SIDEBAR -->
-  <aside class="sidebar" id="sidebar">
-    <h5 class="mb-3 text-label" id="sb_title">لړۍ</h5>
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="topbar-inner">
 
-    <button class="btn btn-sm btn-outline-secondary w-100 mb-3" id="minimizeSidebarBtn">
-      <i class="fa-solid fa-angles-right"></i>
-      <span class="text-label" id="sb_minimize">لږول</span>
-    </button>
+      <div>
+        <button class="btn btn-sm btn-outline-secondary" id="themeToggleBtn">
+          <i class="fa-regular fa-moon"></i>
+          <span id="tb_theme">تاريکه کول</span>
+        </button>
 
-    <ul class="list-unstyled">
-      <li><i class="fa-solid fa-globe"></i> <span class="text-label" id="sb_dashboard">د پښتو په اړه</span></li>
-      <li><i class="fa-solid fa-users"></i> <span class="text-label" id="sb_calendar">پښتانه</span></li>
-      <li><i class="fa-solid fa-route"></i> <span class="text-label" id="sb_table">پښتنې سيمي</span></li>
-      <li><i class="fa-regular fa-id-badge"></i> <span class="text-label" id="sb_pages">پښتو نومونه</span></li>
-      <li><i class="fa-solid fa-gear me-2"></i> <span class="text-label" id="sb_settings">سيټینګ</span></li>
-    </ul>
-  </aside>
+        <button class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown">
+          <i class="fa-solid fa-globe"></i>
+          <span id="tb_language">ژبه</span>
+        </button>
+        <ul class="dropdown-menu">
+          <li><button class="dropdown-item lang-option" data-lang="ps">🇦🇫 پښتو</button></li>
+          <li><button class="dropdown-item lang-option" data-lang="en">🇬🇧 English</button></li>
+        </ul>
+      </div>
 
-  <!-- MAIN CONTENT -->
-  <main class="content" id="content">
+      <div>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/The_Pashto.png" style="height:32px;">
+      </div>
 
-    <!-- TOPBAR -->
-    <header class="topbar">
-      <div class="topbar-inner">
+      <div>
+        <button class="btn btn-sm btn-outline-secondary" id="searchToggleBtn">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <span id="searchButtonLabel">لټون</span>
+        </button>
+      </div>
 
-        <!-- LEFT (Pashto) / RIGHT (English): Theme + Language -->
-        <div class="flex-order-1 topbar-left">
-          <button class="btn btn-sm btn-outline-secondary" id="themeToggleBtn">
-            <i class="fa-regular fa-moon me-1"></i>
-            <span class="d-none d-sm-inline" id="tb_theme">تاريکه کول</span>
-          </button>
+    </div>
+  </div>
 
-          <div class="dropdown">
-            <button class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown">
-              <i class="fa-solid fa-globe"></i>
-              <span class="d-none d-sm-inline" id="tb_language">ژبه</span>
-            </button>
-            <ul class="dropdown-menu dropdown-menu-end">
-              <li><button class="dropdown-item lang-option" data-lang="ps">🇦🇫 پښتو</button></li>
-              <li><button class="dropdown-item lang-option" data-lang="en">🇬🇧 English</button></li>
-            </ul>
+  <!-- SEARCH BAR -->
+  <div id="searchBarWrapper">
+    <input id="searchInput" class="form-control" placeholder="لټون…">
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-content">
+      <h2 id="welcomeText">خدای مو راوله</h2>
+
+      <button class="hero-search-btn" id="heroBtn">
+        <i class="fa-solid fa-chevron-down"></i>
+        <span id="heroPromptText">زه غواړم چې</span>
+      </button>
+
+      <div class="hero-options" id="heroOptions">
+        <a id="heroOpt1" href="#section1">د پښتو په اړه معلومات</a>
+        <a id="heroOpt2" href="#section2">پښتانه څوک دي؟</a>
+        <a id="heroOpt3" href="#section3">پښتنې سیمې وګورئ</a>
+        <a id="heroOpt4" href="#section4">پښتو نومونه پیدا کړئ</a>
+        <a id="heroOpt5" href="#section5">نورې برخې وپلټئ</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- USP BAR -->
+  <div class="usp-box">
+    <h2 id="uspTitle">د پښتو رسمي لارښود</h2>
+
+    <div class="usp">
+      <img src="https://cdn-icons-png.flaticon.com/512/833/833472.png">
+      <p id="usp1">هر کال <strong>میلیونونه</strong> خلک الهام اخلي</p>
+    </div>
+
+    <div class="usp">
+      <img src="https://cdn-icons-png.flaticon.com/512/1828/1828817.png">
+      <p id="usp2"><strong>اسانه موندنه</strong> او باوري سرچینې</p>
+    </div>
+
+    <div class="usp">
+      <img src="https://cdn-icons-png.flaticon.com/512/535/535239.png">
+      <p id="usp3">ستاسې کارونه <strong>پښتو ته ملاتړ</strong> ورکوي</p>
+    </div>
+  </div>
+
+  <!-- MUST-SEES -->
+  <div class="must-sees" id="section1">
+    <h2 id="mustTitle">ضروري ځایونه</h2>
+    <p id="mustIntro">دلته هغه مهم ځایونه دي چې هر پښتون یې باید وویني او تجربه یې کړي.</p>
+
+    <div class="mosaic">
+
+      <div class="tile">
+        <span class="callout-ribbon" id="tile1Ribbon">ځانګړې وړاندیز</span>
+        <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee">
+        <div class="overlay">
+          <div class="textbox">
+            <h3 id="tile1Title">لومړی ځای</h3>
+            <p id="tile1Desc">دلته د ځای لنډ معلومات لیکل کېږي.</p>
           </div>
         </div>
+      </div>
 
-        <!-- CENTER: Logo -->
-        <div class="flex-order-2 topbar-center">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/The_Pashto.png"
-               alt="Logo"
-               style="height:32px; width:auto;">
+      <div class="tile">
+        <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429">
+        <div class="overlay">
+          <div class="textbox">
+            <h3 id="tile2Title">دوهم ځای</h3>
+            <p id="tile2Desc">دلته د ځای لنډ معلومات لیکل کېږي.</p>
+          </div>
         </div>
+      </div>
 
-        <!-- RIGHT (Pashto) / LEFT (English): Search Button -->
-        <div class="flex-order-3 topbar-right">
-          <button class="btn btn-sm btn-outline-secondary" id="searchToggleBtn">
-            <i class="fa-solid fa-magnifying-glass me-1"></i>
-            <span id="searchButtonLabel">لټون</span>
-          </button>
+      <div class="tile">
+        <img src="https://images.unsplash.com/photo-1500534623283-312aade485b7">
+        <div class="overlay">
+          <div class="textbox">
+            <h3 id="tile3Title">درېیم ځای</h3>
+            <p id="tile3Desc">دلته د ځای لنډ معلومات لیکل کېږي.</p>
+          </div>
         </div>
-
       </div>
-    </header>
 
-    <!-- SLIDE-DOWN SEARCH BAR -->
-    <div id="searchBarWrapper" class="mt-2">
-      <div class="position-relative">
-        <i class="fa-solid fa-magnifying-glass search-icon"></i>
-        <input 
-          type="text" 
-          id="searchInput" 
-          placeholder="لټون…" 
-          class="form-control" 
-        >
+      <div class="tile">
+        <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470">
+        <div class="overlay">
+          <div class="textbox">
+            <h3 id="tile4Title">څلورم ځای</h3>
+            <p id="tile4Desc">دلته د ځای لنډ معلومات لیکل کېږي.</p>
+          </div>
+        </div>
       </div>
-      <div id="searchResults" class="mt-2 text-end"></div>
+
     </div>
+  </div>
 
-    <!-- HERO IMAGE SECTION -->
-    <div class="hero-container">
-      <div class="hero-overlay"></div>
-      <div class="hero-content">
-        <h2 id="welcomeText">خدای مو راوله</h2>
-      </div>
-    </div>
-
-    <!-- FOOTER -->
-    <p class="mt-2 mb-0" style="font-size: 14px;">
-      ©2026 PASHTO.af
-    </p>
-
-  </main>
+  <!-- FOOTER -->
+  <p class="footer-fixed" id="footer">©2026 PASHTO.af</p>
 
   <!-- JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
   <script>
-    const myContent = [
-      { title: "د پښتو په اړه", text: "پښتو د افغانانو لرغونې ژبه ده." },
-      { title: "پښتانه", text: "پښتانه د نړۍ یو لوی قوم دۍ." },
-      { title: "تاريخي پښتو اسناد", text: "دلته د پښتو تاریخ اسناد موندل کېږي." }
-    ];
-
-    let currentLang = "ps";
-
-    /* SEARCH ENGINE */
-    function updateSearchResults(q) {
-      const box = document.getElementById("searchResults");
-
-      if (q === "") {
-        box.innerHTML = "";
-        return;
+    /* FOOTER SLIDE-UP */
+    window.addEventListener("scroll", () => {
+      const footer = document.getElementById("footer");
+      if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 10) {
+        footer.classList.add("footer-visible");
+      } else {
+        footer.classList.remove("footer-visible");
       }
-
-      const found = myContent.filter(item =>
-        item.title.toLowerCase().includes(q) ||
-        item.text.toLowerCase().includes(q)
-      );
-
-      if (found.length === 0) {
-        box.innerHTML = `<p class="mt-2">${ui[currentLang].noResult}</p>`;
-        return;
-      }
-
-      box.innerHTML = found
-        .map(item => `<div class="p-2 border rounded mb-1"><strong>${item.title}</strong><br>${item.text}</div>`)
-        .join("");
-    }
-
-    document.getElementById("searchInput").addEventListener("input", function () {
-      updateSearchResults(this.value.trim().toLowerCase());
     });
+
+    /* HERO DROPDOWN */
+    document.getElementById("heroBtn").onclick = () => {
+      const box = document.getElementById("heroOptions");
+      box.style.display = box.style.display === "block" ? "none" : "block";
+    };
 
     /* SEARCH TOGGLE */
-    const searchBarWrapper = document.getElementById("searchBarWrapper");
-    const searchToggleBtn = document.getElementById("searchToggleBtn");
+    document.getElementById("searchToggleBtn").onclick = () => {
+      const box = document.getElementById("searchBarWrapper");
+      box.style.maxHeight = box.style.maxHeight === "0px" || box.style.maxHeight === "" ? "80px" : "0px";
+    };
 
-    searchToggleBtn.addEventListener("click", () => {
-      searchBarWrapper.classList.toggle("open");
-      if (searchBarWrapper.classList.contains("open")) {
-        setTimeout(() => document.getElementById("searchInput").focus(), 200);
-      }
-    });
-
-    /* SIDEBAR + THEME */
-    const sidebar = document.getElementById("sidebar");
-    const content = document.getElementById("content");
-
-    document.getElementById("minimizeSidebarBtn").addEventListener("click", () => {
-      sidebar.classList.toggle("minimized");
-      content.classList.toggle("shifted");
-    });
-
-    document.getElementById("themeToggleBtn").addEventListener("click", () => {
+    /* THEME TOGGLE */
+    document.getElementById("themeToggleBtn").onclick = () => {
       document.body.classList.toggle("dark-mode");
-    });
+    };
 
-    /* LANGUAGE UI */
+    /* LANGUAGE SWITCH */
     const ui = {
       ps: {
-        sb_title: "لړۍ",
-        sb_minimize: "لږول",
-        sb_dashboard: "د پښتو په اړه",
-        sb_calendar: "پښتانه",
-        sb_table: "پښتنې سيمي",
-        sb_pages: "پښتو نومونه",
-        sb_settings: "سيټینګ",
-
+        welcomeText: "خدای مو راوله",
         tb_theme: "تاريکه کول",
         tb_language: "ژبه",
-
-        welcomeText: "خدای مو راوله",
-        searchPlaceholder: "لټون…",
         searchButtonLabel: "لټون",
-        noResult: "شئ لا ونېکه سته"
+        noResult: "شئ لا ونېکه سته",
+        heroPromptText: "زه غواړم چې",
+        heroOpt1: "د پښتو په اړه معلومات",
+        heroOpt2: "پښتانه څوک دي؟",
+        heroOpt3: "پښتنې سیمې وګورئ",
+        heroOpt4: "پښتو نومونه پیدا کړئ",
+        heroOpt5: "نورې برخې وپلټئ",
+        uspTitle: "د پښتو رسمي لارښود",
+        usp1: "هر کال <strong>میلیونونه</strong> خلک الهام اخلي",
+        usp2: "<strong>اسانه موندنه</strong> او باوري سرچینې",
+        usp3: "ستاسې کارونه <strong>پښتو ته ملاتړ</strong> ورکوي",
+        mustTitle: "ضروري ځایونه",
+        mustIntro: "دلته هغه مهم ځایونه دي چې هر پښتون یې باید وویني او تجربه یې کړي.",
+        tile1Ribbon: "ځانګړې وړاندیز",
+        tile1Title: "لومړی ځای",
+        tile1Desc: "دلته د ځای لنډ معلومات لیکل کېږي.",
+        tile2Title: "دوهم ځای",
+        tile2Desc: "دلته د ځای لنډ معلومات لیکل کېږي.",
+        tile3Title: "درېیم ځای",
+        tile3Desc: "دلته د ځای لنډ معلومات لیکل کېږي.",
+        tile4Title: "څلورم ځای",
+        tile4Desc: "دلته د ځای لنډ معلومات لیکل کېږي."
       },
       en: {
-        sb_title: "LiST",
-        sb_minimize: "Minimize",
-        sb_dashboard: "About Pashto",
-        sb_calendar: "Pashtuns",
-        sb_table: "The Pashtun Belt",
-        sb_pages: "Pashto names",
-        sb_settings: "Settings",
-
-        tb_theme: "Dark Mode",
-        tb_language: "Language",
-
         welcomeText: "Welcome",
-        searchPlaceholder: "Search…",
+        tb_theme: "Theme",
+        tb_language: "Language",
         searchButtonLabel: "Search",
-        noResult: "No results found"
+        noResult: "No results found",
+        heroPromptText: "I want to",
+        heroOpt1: "Learn about Pashto",
+        heroOpt2: "Who are the Pashtuns?",
+        heroOpt3: "Explore Pashtun regions",
+        heroOpt4: "Find Pashto names",
+        heroOpt5: "Browse more sections",
+        uspTitle: "Pashto Official Guide",
+        usp1: "Inspiring <strong>millions</strong> every year",
+        usp2: "<strong>Easily find</strong> trusted information",
+        usp3: "Your engagement <strong>supports Pashto culture</strong>",
+        mustTitle: "Must‑see places",
+        mustIntro: "Here are key places every Pashto lover should see and experience.",
+        tile1Ribbon: "Special offer",
+        tile1Title: "First place",
+        tile1Desc: "Short description goes here.",
+        tile2Title: "Second place",
+        tile2Desc: "Short description goes here.",
+        tile3Title: "Third place",
+        tile3Desc: "Short description goes here.",
+        tile4Title: "Fourth place",
+        tile4Desc: "Short description goes here."
       }
     };
 
-    function updateLanguage(lang) {
-      currentLang = lang;
-      const map = ui[lang];
-
-      document.getElementById("sb_title").textContent = map.sb_title;
-      document.getElementById("sb_minimize").textContent = map.sb_minimize;
-      document.getElementById("sb_dashboard").textContent = map.sb_dashboard;
-      document.getElementById("sb_calendar").textContent = map.sb_calendar;
-      document.getElementById("sb_table").textContent = map.sb_table;
-      document.getElementById("sb_pages").textContent = map.sb_pages;
-      document.getElementById("sb_settings").textContent = map.sb_settings;
-
-      document.getElementById("tb_theme").textContent = map.tb_theme;
-      document.getElementById("tb_language").textContent = map.tb_language;
-
-      document.getElementById("welcomeText").textContent = map.welcomeText;
-      document.getElementById("searchInput").placeholder = map.searchPlaceholder;
-      document.getElementById("searchButtonLabel").textContent = map.searchButtonLabel;
-
-      if (lang === "ps") {
-        document.body.setAttribute("dir", "rtl");
-        document.body.classList.remove("ltr");
-        document.body.classList.add("rtl");
-      } else {
-        document.body.setAttribute("dir", "ltr");
-        document.body.classList.remove("rtl");
-        document.body.classList.add("ltr");
-      }
-    }
-
     document.querySelectorAll(".lang-option").forEach(btn => {
-      btn.addEventListener("click", () => {
-        updateLanguage(btn.dataset.lang);
-      });
+      btn.onclick = () => {
+        const lang = btn.dataset.lang;
+        const map = ui[lang];
+
+        document.getElementById("welcomeText").textContent = map.welcomeText;
+        document.getElementById("tb_theme").textContent = map.tb_theme;
+        document.getElementById("tb_language").textContent = map.tb_language;
+        document.getElementById("searchButtonLabel").textContent = map.searchButtonLabel;
+
+        document.getElementById("heroPromptText").textContent = map.heroPromptText;
+        document.getElementById("heroOpt1").textContent = map.heroOpt1;
+        document.getElementById("heroOpt2").textContent = map.heroOpt2;
+        document.getElementById("heroOpt3").textContent = map.heroOpt3;
+        document.getElementById("heroOpt4").textContent = map.heroOpt4;
+        document.getElementById("heroOpt5").textContent = map.heroOpt5;
+
+        document.getElementById("uspTitle").textContent = map.uspTitle;
+        document.getElementById("usp1").innerHTML = map.usp1;
+        document.getElementById("usp2").innerHTML = map.usp2;
+        document.getElementById("usp3").innerHTML = map.usp3;
+
+        document.getElementById("mustTitle").textContent = map.mustTitle;
+        document.getElementById("mustIntro").textContent = map.mustIntro;
+
+        document.getElementById("tile1Ribbon").textContent = map.tile1Ribbon;
+        document.getElementById("tile1Title").textContent = map.tile1Title;
+        document.getElementById("tile1Desc").textContent = map.tile1Desc;
+        document.getElementById("tile2Title").textContent = map.tile2Title;
+        document.getElementById("tile2Desc").textContent = map.tile2Desc;
+        document.getElementById("tile3Title").textContent = map.tile3Title;
+        document.getElementById("tile3Desc").textContent = map.tile3Desc;
+        document.getElementById("tile4Title").textContent = map.tile4Title;
+        document.getElementById("tile4Desc").textContent = map.tile4Desc;
+
+        if (lang === "ps") {
+          document.documentElement.lang = "ps";
+          document.documentElement.dir = "rtl";
+          document.body.classList.add("rtl");
+          document.body.classList.remove("ltr");
+        } else {
+          document.documentElement.lang = "en";
+          document.documentElement.dir = "ltr";
+          document.body.classList.add("ltr");
+          document.body.classList.remove("rtl");
+        }
+      };
     });
   </script>
-
 </body>
 </html>
