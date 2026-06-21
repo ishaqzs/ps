@@ -183,6 +183,18 @@
         پر هر کاغذ، پر هر دېوال، هم یې په مځکه ليکم زه پر پښتو باندې مین یم پښتو ځکه ليکم
       </p>
     </div>
+    <!-- Include Pagefind UI styles and scripts -->
+<link href="/pagefind/pagefind-ui.css" rel="stylesheet">
+<script src="/pagefind/pagefind-ui.js"></script>
+
+<!-- The search bar container -->
+<div id="search"></div>
+
+<script>
+    window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({ element: "#search", showSubResults: true });
+    });
+</script>
 <!-- FOOTER -->
   <p class="mt-2 mb-0" style="font-size: 14px;">
     ©2026 PASHTO.af
