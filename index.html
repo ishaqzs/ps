@@ -2,10 +2,10 @@
 <html lang="ps" dir="rtl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport"width="width=device-width, initial-scale=1.0" />
   <title>پښتو</title>
 
-  <!-- Persian-style thin font -->
+  <!-- Font -->
   <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;200;300;400;500&display=swap" rel="stylesheet">
 
   <!-- Bootstrap -->
@@ -24,17 +24,13 @@
       font-weight: 300;
     }
 
-    /* Make main content readable */
     .content {
-      font-weight: 400;
+      flex: 1;
+      padding: 20px;
+      text-align: right;
+      transition: margin-right 0.3s ease;
     }
 
-    /* Make headings visible */
-    h1, h2, h3, h4, h5, h6 {
-      font-weight: 500;
-    }
-
-    /* SIDEBAR */
     .sidebar {
       width: 260px;
       background: #f8f9fa;
@@ -63,13 +59,6 @@
       }
     }
 
-    .content {
-      flex: 1;
-      padding: 20px;
-      transition: margin-right 0.3s ease;
-      text-align: right;
-    }
-
     .content.shifted {
       margin-right: 80px;
     }
@@ -78,14 +67,34 @@
       background: #fff;
       border-bottom: 1px solid #ddd;
       padding: 10px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
       position: sticky;
       top: 0;
       z-index: 900;
-      direction: rtl;
     }
+
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .flex-order-1,
+    .flex-order-2,
+    .flex-order-3 {
+      display: flex;
+      align-items: center;
+      flex: 1;
+    }
+
+    /* RTL ORDER (Pashto) */
+    body.rtl .flex-order-1 { order: 1; justify-content: flex-start; }
+    body.rtl .flex-order-2 { order: 2; justify-content: center; }
+    body.rtl .flex-order-3 { order: 3; justify-content: flex-end; }
+
+    /* LTR ORDER (English) */
+    body.ltr .flex-order-1 { order: 3; justify-content: flex-end; }
+    body.ltr .flex-order-2 { order: 2; justify-content: center; }
+    body.ltr .flex-order-3 { order: 1; justify-content: flex-start; }
 
     body.dark-mode {
       background: #1e1e1e;
@@ -100,39 +109,79 @@
       border-color: #444;
     }
 
-    .ltr {
-      direction: ltr;
-      text-align: left;
+    /* Slide-down search bar */
+    #searchBarWrapper {
+      overflow: hidden;
+      max-height: 0;
+      transition: max-height 0.3s ease;
     }
-    .ltr .sidebar {
-      border-right: 1px solid #ddd;
-      border-left: none;
-    }
-    .ltr .content {
-      text-align: left;
-      margin-left: 0;
-    }
-    .ltr .topbar {
-      direction: ltr;
+    #searchBarWrapper.open {
+      max-height: 120px;
     }
 
-    .rtl .content {
-      text-align: right;
+    #searchInput {
+      padding-right: 40px;
+      border-radius: 24px;
     }
 
-    /* ⭐ Search bar glow */
+    #searchBarWrapper .search-icon {
+      position: absolute;
+      top: 50%;
+      right: 14px;
+      transform: translateY(-50%);
+      color: #666;
+    }
+
     #searchInput:focus {
-      box-shadow: 0 0 10px rgba(0, 150, 255, 0.4);
-      border-color: #0096ff;
+      box-shadow: 0 0 12px rgba(0,150,255,0.5);
     }
 
-    /* ⭐ Fade-in animation for results */
     #searchResults div {
       animation: fadeIn 0.3s ease;
     }
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(5px); }
       to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-container {
+      position: relative;
+      width: 100%;
+      height: 380px;
+      background-image: url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee');
+      background-size: cover;
+      background-position: center;
+      border-radius: 12px;
+      overflow: hidden;
+      margin-top: 20px;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+      backdrop-filter: blur(2px);
+    }
+
+    .hero-content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      max-width: 600px;
+      text-align: center;
+      color: white;
+    }
+
+    #welcomeText {
+      font-size: 50px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      margin-bottom: 25px;
+      text-shadow:
+        0 3px 12px rgba(0,0,0,0.55),
+        0 0 25px rgba(0,150,255,0.25);
     }
   </style>
 </head>
@@ -162,99 +211,88 @@
 
     <!-- TOPBAR -->
     <header class="topbar">
-   <div class="d-flex align-items-center gap-2">
-  <button class="btn btn-sm btn-outline-secondary d-lg-none" id="mobileSidebarBtn">
-    <i class="fa-solid fa-bars"></i>
-  </button>
-  <!-- Your Logo -->
-  <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/The_Pashto.png" alt="Logo" style="height:32px; width:auto;">
-</div>
+      <div class="topbar-inner">
 
-      <div class="d-flex align-items-center gap-2">
-
-        <button class="btn btn-sm btn-outline-secondary" id="themeToggleBtn">
-          <i class="fa-regular fa-moon me-1"></i>
-          <span class="d-none d-sm-inline" id="tb_theme">تاريکه کول</span>
-        </button>
-
-        <div class="dropdown">
-          <button class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown">
-            <i class="fa-solid fa-globe"></i>
-            <span class="d-none d-sm-inline" id="tb_language">ژبه</span>
+        <!-- LEFT (Pashto) / RIGHT (English): Theme + Language -->
+        <div class="flex-order-1">
+          <button class="btn btn-sm btn-outline-secondary" id="themeToggleBtn">
+            <i class="fa-regular fa-moon me-1"></i>
+            <span class="d-none d-sm-inline" id="tb_theme">تاريکه کول</span>
           </button>
-          <ul class="dropdown-menu dropdown-menu-end">
-            <li><button class="dropdown-item lang-option" data-lang="ps">🇦🇫 پښتو</button></li>
-            <li><button class="dropdown-item lang-option" data-lang="en">🇬🇧 English</button></li>
-          </ul>
+
+          <div class="dropdown">
+            <button class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown">
+              <i class="fa-solid fa-globe"></i>
+              <span class="d-none d-sm-inline" id="tb_language">ژبه</span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><button class="dropdown-item lang-option" data-lang="ps">🇦🇫 پښتو</button></li>
+              <li><button class="dropdown-item lang-option" data-lang="en">🇬🇧 English</button></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- CENTER: Logo -->
+        <div class="flex-order-2">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/The_Pashto.png"
+               alt="Logo"
+               style="height:32px; width:auto;">
+        </div>
+
+        <!-- RIGHT (Pashto) / LEFT (English): Search Button -->
+        <div class="flex-order-3">
+          <button class="btn btn-sm btn-outline-secondary" id="searchToggleBtn">
+            <i class="fa-solid fa-magnifying-glass me-1"></i>
+            <span id="searchButtonLabel">لټون</span>
+          </button>
         </div>
 
       </div>
     </header>
 
-    <!-- WELCOME TEXT -->
-    <div class="mt-4">
-<h2 id="welcomeText" style="
-  text-align:center;
-  font-size: 42px;
-  font-weight: 600;
-  letter-spacing: 1px;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.15);
-">
-  خدای مو راوله
-</h2>      <p id="welcomeSubText">
-        پر هر کاغذ، پر هر دېوال، هم یې په مځکه ليکم زه پر پښتو باندې مین یم پښتو ځکه ليکم
-      </p>
-
-      <!-- ⭐ STYLED SEARCH BAR -->
-      <div class="d-flex justify-content-center mt-5">
-        <div style="position: relative; width: 100%; max-width: 500px;">
-          
-          <i class="fa-solid fa-magnifying-glass"
-             style="
-               position: absolute;
-               top: 50%;
-               right: 15px;
-               transform: translateY(-50%);
-               color: #888;
-               font-size: 18px;
-             ">
-          </i>
-
-          <input 
-            type="text" 
-            id="searchInput" 
-            placeholder="لټون…" 
-            class="form-control" 
-            style="
-              font-size: 20px;
-              padding: 15px 45px 15px 15px;
-              text-align: center;
-              border-radius: 50px;
-              border: 1px solid #ddd;
-              box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-              transition: 0.2s;
-            ">
-        </div>
+    <!-- SLIDE-DOWN SEARCH BAR -->
+    <div id="searchBarWrapper" class="mt-2">
+      <div class="position-relative">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input 
+          type="text" 
+          id="searchInput" 
+          placeholder="لټون…" 
+          class="form-control" 
+        >
       </div>
-
-      <div id="searchResults" class="mt-4 text-center"></div>
+      <div id="searchResults" class="mt-2 text-end"></div>
     </div>
 
-<!-- FOOTER -->
-  <p class="mt-2 mb-0" style="font-size: 14px;">
-    ©2026 PASHTO.af
-  </p>
-</footer>
+    <!-- HERO IMAGE SECTION -->
+    <div class="hero-container">
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <h2 id="welcomeText">خدای مو راوله</h2>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <p class="mt-2 mb-0" style="font-size: 14px;">
+      ©2026 PASHTO.af
+    </p>
+
   </main>
 
   <!-- JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
   <script>
+    const myContent = [
+      { title: "د پښتو په اړه", text: "پښتو د افغانانو لرغونې ژبه ده." },
+      { title: "پښتانه", text: "پښتانه د نړۍ یو لوی قوم دۍ." },
+      { title: "تاريخي پښتو اسناد", text: "دلته د پښتو تاریخ اسناد موندل کېږي." }
+    ];
+
+    let currentLang = "ps";
 
     /* SEARCH ENGINE */
-    document.getElementById("searchInput").addEventListener("input", function () {
-      const q = this.value.trim().toLowerCase();
+    function updateSearchResults(q) {
       const box = document.getElementById("searchResults");
 
       if (q === "") {
@@ -268,27 +306,33 @@
       );
 
       if (found.length === 0) {
-        box.innerHTML = "<p>شئ لا ونېکه سته</p>";
+        box.innerHTML = `<p class="mt-2">${ui[currentLang].noResult}</p>`;
         return;
       }
 
       box.innerHTML = found
-        .map(item => `<div class="p-3 border rounded mb-2"><strong>${item.title}</strong><br>${item.text}</div>`)
+        .map(item => `<div class="p-2 border rounded mb-1"><strong>${item.title}</strong><br>${item.text}</div>`)
         .join("");
+    }
+
+    document.getElementById("searchInput").addEventListener("input", function () {
+      updateSearchResults(this.value.trim().toLowerCase());
     });
 
-    const myContent = [
-      { title: "د پښتو په اړه", text: "پښتو د افغانانو لرغونې ژبه ده." },
-      { title: "پښتانه", text: "پښتانه د نړۍ یو لوی قوم دۍ." },
-      { title: "تاريخي پښتو اسناد", text: "دلته د پښتو تاریخ اسناد موندل کېږي." }
-    ];
+    /* SEARCH TOGGLE */
+    const searchBarWrapper = document.getElementById("searchBarWrapper");
+    const searchToggleBtn = document.getElementById("searchToggleBtn");
 
+    searchToggleBtn.addEventListener("click", () => {
+      searchBarWrapper.classList.toggle("open");
+      if (searchBarWrapper.classList.contains("open")) {
+        setTimeout(() => document.getElementById("searchInput").focus(), 200);
+      }
+    });
+
+    /* SIDEBAR + THEME */
     const sidebar = document.getElementById("sidebar");
     const content = document.getElementById("content");
-
-    document.getElementById("mobileSidebarBtn").addEventListener("click", () => {
-      sidebar.classList.toggle("sidebar-visible");
-    });
 
     document.getElementById("minimizeSidebarBtn").addEventListener("click", () => {
       sidebar.classList.toggle("minimized");
@@ -299,6 +343,7 @@
       document.body.classList.toggle("dark-mode");
     });
 
+    /* LANGUAGE UI */
     const ui = {
       ps: {
         sb_title: "لړۍ",
@@ -309,16 +354,14 @@
         sb_pages: "پښتو نومونه",
         sb_settings: "سيټینګ",
 
-        tb_title: "پښتو",
         tb_theme: "تاريکه کول",
         tb_language: "ژبه",
 
         welcomeText: "خدای مو راوله",
-        welcomeSubText: "پر هر کاغذ، پر هر دېوال، هم یې په مځکه ليکم زه پر پښتو باندې مین یم پښتو ځکه ليکم",
-
-        searchPlaceholder: "لټون…"
+        searchPlaceholder: "لټون…",
+        searchButtonLabel: "لټون",
+        noResult: "شئ لا ونېکه سته"
       },
-      
       en: {
         sb_title: "LiST",
         sb_minimize: "Minimize",
@@ -328,24 +371,34 @@
         sb_pages: "Pashto names",
         sb_settings: "Settings",
 
-        tb_title: "Pashto",
         tb_theme: "Dark Mode",
         tb_language: "Language",
 
         welcomeText: "Welcome",
-        welcomeSubText: "انسان تر کاڼي سخت تر ګل نازک دۍ; Humans can be tougher than a rock and more fragile than a flower.",
-
-        searchPlaceholder: "Search…"
+        searchPlaceholder: "Search…",
+        searchButtonLabel: "Search",
+        noResult: "No results found"
       }
     };
 
     function updateLanguage(lang) {
-      for (const key in ui[lang]) {
-        const el = document.getElementById(key);
-        if (el) el.textContent = ui[lang][key];
-      }
+      currentLang = lang;
+      const map = ui[lang];
 
-      document.getElementById("searchInput").placeholder = ui[lang].searchPlaceholder;
+      document.getElementById("sb_title").textContent = map.sb_title;
+      document.getElementById("sb_minimize").textContent = map.sb_minimize;
+      document.getElementById("sb_dashboard").textContent = map.sb_dashboard;
+      document.getElementById("sb_calendar").textContent = map.sb_calendar;
+      document.getElementById("sb_table").textContent = map.sb_table;
+      document.getElementById("sb_pages").textContent = map.sb_pages;
+      document.getElementById("sb_settings").textContent = map.sb_settings;
+
+      document.getElementById("tb_theme").textContent = map.tb_theme;
+      document.getElementById("tb_language").textContent = map.tb_language;
+
+      document.getElementById("welcomeText").textContent = map.welcomeText;
+      document.getElementById("searchInput").placeholder = map.searchPlaceholder;
+      document.getElementById("searchButtonLabel").textContent = map.searchButtonLabel;
 
       if (lang === "ps") {
         document.body.setAttribute("dir", "rtl");
