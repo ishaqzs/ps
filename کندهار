@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="ps" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>پښتو</title>
+         <link rel="shortcut icon" href="https://upload.wikimedia.org/wikipedia/commons/4/44/The_Pashto.png">
+<meta name="description" content="پښتو ټکۍاف د پښتو، پښتنو او پښتونولۍ اړوند مالومات نشروي"/>
+        <link rel="shortcut icon" type="image/svg" href="https://upload.wikimedia.org/wikipedia/commons/4/44/The_Pashto.png"/>
+        <link rel="alternate" hreflang="x-default" href="https://Pashto.af/"/>
+<meta property="og:site_name" content="پښتو"/>
+        <meta property="article:publisher" content="https://www.pashto.af"/>
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+        <meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/4/44/The_Pashto.png"/>
+        <!-- This site is own by mr KHAN.af -->
+<meta name="description" content="پښتو ټکۍاف د پښتو، پښتنو او پښتونولۍ اړوند مالومات نشروي"/>
+<link rel="canonical" href="https://pashto.af/"/>
+<meta property="og:locale" content="ps_AF"/>
+        <meta property="og:type" content="website"/>
+        <meta property="og:title" content="پښتو"/>
+        <meta property="og:description" content="پښتو ټکۍاف د پښتو، پښتنو او پښتونولۍ اړوند مالومات نشروي"/>
+        <meta property="og:url" content="https://pashto.af/"/>
+        <meta name="hostname" content="pashto.af">
+        <meta name="expected-hostname" content="pashto.af">
+        <meta property="og:site_name" content="پښتو"/>
+        <meta property="article:publisher" content="https://www.pashto.af"/>
+        <meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/4/44/The_Pashto.png"/>
+  
+  
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+  <style>
+  
+    #searchResults {
+  width: calc(100% - 40px); /* same margin as searchInput */
+  margin: 0 auto;
+  position: relative;
+  z-index: 9999;
+  background: white;
+  padding: 10px;
+  border-radius: 8px;
+}
+body.dark-mode #searchResults {
+  background: #1e1e1e;
+}
+
+  #searchResults {
+  position: relative;
+  z-index: 9999;
+  background: white;
+}
+body.dark-mode #searchResults {
+  background: #1e1e1e;
+}
+
+    * {
+      box-sizing: border-box;
+      pointer-events: auto;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Vazirmatn', sans-serif;
+      background: #ffffff;
+      color: #111;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    body.dark-mode {
+      background: #1e1e1e;
+      color: #eee;
+    }
+
+    /* TOPBAR */
+    .topbar {
+      background: #fff;
+      border-bottom: 1px solid #ddd;
+      padding: 10px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    body.dark-mode .topbar {
+      background: #2b2b2b;
+      border-color: #444;
+    }
+
+    .topbar-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+
+
+    /* SEARCH-STYLE BUTTON */
+    .hero-search-btn {
+      background: none;
+      color: #333;
+      padding: 12px 20px;
+      border-radius: 30px;
+      width: 260px;
+      margin: 0 auto;
+      cursor: pointer;
+      font-size: 17px;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      position: relative;
+      z-index: 3;
+    }
+
+    .hero-options {
+      display: none;
+      margin-top: 12px;
+      background: rgba(0,0,0,0.45);
+      backdrop-filter: blur(3px);
+      border-radius: 12px;
+      padding: 10px;
+      position: relative;
+      z-index: 3;
+    }
+
+    .hero-options a {
+      display: block;
+      padding: 8px;
+      color: white;
+      text-decoration: none;
+      font-size: 16px;
+    }
+
+    .hero-options a:hover {
+      text-decoration: underline;
+    }
+
+    /* SEARCH BAR */
+    #searchBarWrapper {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      border-bottom: 1px solid #eee;
+    }
+
+    #searchInput {
+      margin: 10px 20px 15px 20px;
+    }
+
+    /* USP BAR */
+    .usp-box {
+      background: #b30000;
+      color: white;
+      padding: 25px;
+      border-radius: 12px;
+      max-width: 900px;
+      margin: 30px auto;
+      text-align: center;
+    }
+
+    .usp {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 18px;
+      align-items: center;
+    }
+
+    .usp img {
+      width: 32px;
+      filter: brightness(0) invert(1);
+    }
+
+    /* MUST-SEES */
+    .must-sees {
+      max-width: 1100px;
+      margin: 40px auto 80px auto;
+      text-align: center;
+      padding: 0 20px;
+    }
+
+    .mosaic {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-top: 20px;
+    }
+
+    .tile {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .tile img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .callout-ribbon {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: #b30000;
+      color: white;
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 13px;
+      z-index: 10;
+      white-space: nowrap;
+    }
+
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);
+      opacity: 0;
+      transition: 0.3s;
+    }
+
+    .tile:hover .overlay {
+      opacity: 1;
+    }
+
+    .textbox {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      color: white;
+    }
+
+    /* FOOTER (HIDDEN UNTIL BOTTOM) */
+    .footer-fixed {
+      position: fixed;
+      bottom: 10px;
+      left: 50%;
+      transform: translate(-50%, 40px);
+      opacity: 0;
+      transition: all 0.4s ease;
+      font-size: 14px;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    .footer-visible {
+      transform: translate(-50%, 0);
+      opacity: 1;
+    }
+
+    /* MOBILE */
+    @media (max-width: 600px) {
+      #welcomeText { font-size: 34px; }
+      .hero { margin: 10px; height: 340px; }
+      .mosaic { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<body class="rtl">
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="topbar-inner">
+
+      <div>
+        <button class="btn btn-sm btn-outline-secondary" id="themeToggleBtn">
+          <i class="fa-regular fa-moon"></i>
+          <span id="tb_theme">تاريکه کول</span>
+        </button>
+
+        <button class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown">
+          <i class="fa-solid fa-globe"></i>
+          <span id="tb_language">ژبه</span>
+        </button>
+        <ul class="dropdown-menu">
+          <li><button class="dropdown-item lang-option" data-lang="ps">🇦🇫 پښتو</button></li>
+          <li><button class="dropdown-item lang-option" data-lang="en">🇬🇧 English</button></li>
+        </ul>
+      </div>
+
+      <div>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/The_Pashto.png" style="height:32px;">
+      </div>
+
+      <div>
+        <button class="btn btn-sm btn-outline-secondary" id="searchToggleBtn">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <span id="searchButtonLabel">لټون</span>
+        </button>
+      </div>
+
+    </div>
+
+  <!-- SEARCH BAR -->
+  <div id="searchBarWrapper">
+    <input id="searchInput" class="form-control" placeholder="لټون…">
+    <div id="searchResults"></div>
+  </div>
+
+<button class="hero-search-btn" id="heroBtn">
+
+      </button>
+
+  <div class="must-sees" id="section0">
+    <h2 id="mustTitle">نامي او مُهمې پښتنې سيمي</h2> 
+    <p id="mustIntro">لاندې ۴ ښارونه د پښتو دپاره ډېر مُهم دي او هر پښتون یې باید یو وار وويني.</p>
+
+    <div class="mosaic">
+
+      <div class="tile">
+        <span class="callout-ribbon" id="tile1Ribbon">د هېواد سياسي زړه</span>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/1/11/Nomads_in_Kandahar_province.jpg">
+        <div class="overlay">
+          <div class="textbox">
+            <h3 id="tile1Title">کندهار</h3>
+            <p id="tile1Desc">د افغانستان ډِي‌فِکټو پلازمېنه</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="tile">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/f/f5/University_of_Peshawar.jpg">
+        <div class="overlay">
+          <div class="textbox">
+            <h3 id="tile2Title">پېښور</h3>
+            <p id="tile2Desc">د پښتنو در ټولو ستر ښار</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="tile">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/9/95/Road_from_Jalalabad_to_Kabul.jpg">
+        <div class="overlay">
+          <div class="textbox">
+            <h3 id="tile3Title">جلال آباد</h3>
+            <p id="tile3Desc">په افغانستان کې د پښتنو تر ټولو ستر ښار</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="tile">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/0/0e/Marine%2C_Army_convoy_brings_%27Home%27_to_Helmand_130804-M-ZB219-033.jpg">
+        <div class="overlay">
+          <div class="textbox">
+            <h3 id="tile4Title">هلمند</h3>
+            <p id="tile4Desc">يو ښار چې شاوخوا ګرده پښتانه دي، حتا بلوڅان يې هم پښتو وايي</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+<div class="footer-fixed" id="footer">
+    <p class="copyright">PASHTO.af</p>
+  <div class="social-share">
+  <div class="social-share">
+    <a class="share-btn instagram" href="https://www.instagram.com/PASHTO.af" target="_blank">
+  <i class="fa-brands fa-instagram"></i>
+</a>
+</a>
+  <!-- JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+let currentLang = "ps";
+
+const searchData = [
+  { title: "پښتو", text: "د پښتو ژبې په اړه معلومات" },
+  { title: "پښتانه", text: "د پښتنو قوم په اړه معلومات" },
+  { title: "سیمې", text: "پښتنې سیمې او ځایونه" }
+];
+
+document.getElementById("searchInput").addEventListener("input", function () {
+  const q = this.value.trim().toLowerCase();
+  const box = document.getElementById("searchResults");
+
+  if (q === "") {
+    box.innerHTML = "";
+    return;
+  }
+
+  const found = searchData.filter(item =>
+    item.title.toLowerCase().includes(q) ||
+    item.text.toLowerCase().includes(q)
+  );
+
+  if (found.length === 0) {
+    box.innerHTML = `<p>${ui[currentLang].noResult}</p>`;
+    return;
+  }
+
+  box.innerHTML = found
+    .map(item => `<div><strong>${item.title}</strong><br>${item.text}</div>`)
+    .join("");
+});
+
+/* FOOTER SLIDE-UP */
+window.addEventListener("scroll", () => {
+  const footer = document.getElementById("footer");
+  if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 10) {
+    footer.classList.add("footer-visible");
+  } else {
+    footer.classList.remove("footer-visible");
+  }
+});
+
+/* HERO DROPDOWN */
+document.getElementById("heroBtn").onclick = () => {
+  const box = document.getElementById("heroOptions");
+  box.style.display = box.style.display === "block" ? "none" : "block";
+};
+
+/* SEARCH TOGGLE */
+document.getElementById("searchToggleBtn").onclick = () => {
+  const box = document.getElementById("searchBarWrapper");
+  box.style.maxHeight = box.style.maxHeight === "0px" || box.style.maxHeight === "" ? "400px" : "0px";
+};
+
+/* THEME TOGGLE */
+document.getElementById("themeToggleBtn").onclick = () => {
+  document.body.classList.toggle("dark-mode");
+};
+
+/* LANGUAGE SWITCH */
+const ui = {
+  ps: {
+    tb_theme: "تاريکه کول",
+    tb_language: "ژبه",
+    searchButtonLabel: "لټون",
+    noResult: "شئ لا ونېکه سته",
+    heroOpt1: "د پښتو په اړه معلومات",
+    heroOpt2: "پښتانه څوک دي؟",
+    heroOpt3: "پښتنې سیمې وګورئ",
+    heroOpt4: "پښتو نومونه پیدا کړئ",
+    heroOpt5: "نورې برخې وپلټئ",
+    uspTitle: "د پښتو رسمي لارښود",
+    mustTitle: "ضروري ځایونه",
+    mustIntro: "لاندې ۴ ښارونه د پښتو دپاره ډېر مُهم دي او هر پښتون یې باید یو وار وويني.",
+    tile1Ribbon: "ځانګړې وړاندیز",
+    tile1Title: "لومړی ځای",
+    tile1Desc: "دلته د ځای لنډ معلومات لیکل کېږي.",
+    tile2Title: "دوهم ځای",
+    tile2Desc: "دلته د ځای لنډ معلومات لیکل کېږي.",
+    tile3Title: "درېیم ځای",
+    tile3Desc: "دلته د ځای لنډ معلومات لیکل کېږي.",
+    tile4Title: "څلورم ځای",
+    tile4Desc: "دلته د ځای لنډ معلومات لیکل کېږي."
+  },
+  en: {
+    welcomeText: "Welcome",
+    tb_theme: "Theme",
+    tb_language: "Language",
+    searchButtonLabel: "Search",
+    noResult: "No results found",
+    heroPromptText: "I want to",
+    heroOpt1: "Learn about Pashto",
+    heroOpt2: "Who are the Pashtuns?",
+    heroOpt3: "Explore Pashtun regions",
+    heroOpt4: "Find Pashto names",
+    heroOpt5: "Browse more sections",
+    uspTitle: "Pashto Official Guide",
+    usp1: "Inspiring <strong>millions</strong> every year",
+    usp2: "<strong>Easily find</strong> trusted information",
+    usp3: "Your engagement <strong>supports Pashto culture</strong>",
+    mustTitle: "Must‑see places",
+    mustIntro: "Here are key places every Pashto lover should see and experience.",
+    tile1Ribbon: "Special offer",
+    tile1Title: "First place",
+    tile1Desc: "Short description goes here.",
+    tile2Title: "Second place",
+    tile2Desc: "Short description goes here.",
+    tile3Title: "Third place",
+    tile3Desc: "Short description goes here.",
+    tile4Title: "Fourth place",
+    tile4Desc: "Short description goes here."
+  }
+};
+
+document.querySelectorAll(".lang-option").forEach(btn => {
+  btn.onclick = () => {
+    const lang = btn.dataset.lang;
+    const map = ui[lang];
+    currentLang = lang;
+
+    document.getElementById("welcomeText").textContent = map.welcomeText;
+    document.getElementById("tb_theme").textContent = map.tb_theme;
+    document.getElementById("tb_language").textContent = map.tb_language;
+    document.getElementById("searchButtonLabel").textContent = map.searchButtonLabel;
+
+    document.getElementById("heroPromptText").textContent = map.heroPromptText;
+    document.getElementById("heroOpt1").textContent = map.heroOpt1;
+    document.getElementById("heroOpt2").textContent = map.heroOpt2;
+    document.getElementById("heroOpt3").textContent = map.heroOpt3;
+    document.getElementById("heroOpt4").textContent = map.heroOpt4;
+    document.getElementById("heroOpt5").textContent = map.heroOpt5;
+
+    document.getElementById("uspTitle").textContent = map.uspTitle;
+    document.getElementById("usp1").innerHTML = map.usp1;
+    document.getElementById("usp2").innerHTML = map.usp2;
+    document.getElementById("usp3").innerHTML = map.usp3;
+
+    document.getElementById("mustTitle").textContent = map.mustTitle;
+    document.getElementById("mustIntro").textContent = map.mustIntro;
+
+    document.getElementById("tile1Ribbon").textContent = map.tile1Ribbon;
+    document.getElementById("tile1Title").textContent = map.tile1Title;
+    document.getElementById("tile1Desc").textContent = map.tile1Desc;
+    document.getElementById("tile2Title").textContent = map.tile2Title;
+    document.getElementById("tile2Desc").textContent = map.tile2Desc;
+    document.getElementById("tile3Title").textContent = map.tile3Title;
+    document.getElementById("tile3Desc").textContent = map.tile3Desc;
+    document.getElementById("tile4Title").textContent = map.tile4Title;
+    document.getElementById("tile4Desc").textContent = map.tile4Desc;
+
+    if (lang === "ps") {
+      document.documentElement.lang = "ps";
+      document.documentElement.dir = "rtl";
+      document.body.classList.add("rtl");
+      document.body.classList.remove("ltr");
+    } else {
+      document.documentElement.lang = "en";
+      document.documentElement.dir = "ltr";
+      document.body.classList.add("ltr");
+      document.body.classList.remove("rtl");
+    }
+  };
+});
+  </script>
+</body>
+</html>
